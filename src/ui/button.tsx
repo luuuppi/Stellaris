@@ -1,5 +1,10 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { type ComponentPropsWithoutRef, type FC, type ReactNode } from "react";
+import {
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  type ReactNode,
+} from "react";
 
 const buttonStyles = cva("transition-colors duration-150 ease-in-out", {
   variants: {
@@ -25,13 +30,15 @@ type ButtonProps = {
 } & ComponentPropsWithoutRef<"button"> &
   VariantProps<typeof buttonStyles>;
 
-const Button: FC<ButtonProps> = ({ children, className, variant, size, leadingIcon }) => {
-  return (
-    <button className={buttonStyles({ variant, size, className })}>
-      {leadingIcon}
-      {children}
-    </button>
-  );
-};
+const Button = forwardRef<ElementRef<"button">, ButtonProps>(
+  ({ children, className, variant, size, leadingIcon, ...props }, ref) => {
+    return (
+      <button className={buttonStyles({ variant, size, className })} ref={ref} {...props}>
+        {leadingIcon}
+        {children}
+      </button>
+    );
+  },
+);
 
 export default Button;
