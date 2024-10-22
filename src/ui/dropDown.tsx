@@ -1,4 +1,3 @@
-// TODO: Double check the code and commit!
 import {
   Content as ContentPrimitive,
   Item as ItemPrimitive,
