@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 
-const buttonStyles = cva("transition-colors duration-150 ease-in-out", {
+const buttonStyles = cva("transition-colors duration-150 ease-in-out font-medium", {
   variants: {
     variant: {
       primary: "bg-accent-600 hover:bg-accent-700 active:bg-accent-800",
