@@ -11,6 +11,7 @@ const buttonStyles = cva("transition-colors duration-150 ease-in-out font-medium
     variant: {
       primary: "bg-accent-600 hover:bg-accent-700 active:bg-accent-800",
       tertiary: "text-night-300 hover:bg-night-700/30 active:bg-night-700/50",
+      danger: "bg-red-500 hover:bg-red-600 active:bg-red-700",
     },
     size: {
       md: "flex gap-1 rounded-xl px-6 py-3",
