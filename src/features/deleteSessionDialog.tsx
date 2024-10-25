@@ -13,10 +13,11 @@ import { forwardRef } from "react";
 
 type DeleteSessionDialogProps = {
   sessionId: string;
+  sessionName: string;
 };
 
 const DeleteSessionDialog = forwardRef<HTMLDivElement, DeleteSessionDialogProps>(
-  ({ sessionId }, ref) => {
+  ({ sessionId, sessionName }, ref) => {
     const deleteSession = useSessionStore((state) => state.deleteSession);
 
     return (
@@ -27,7 +28,7 @@ const DeleteSessionDialog = forwardRef<HTMLDivElement, DeleteSessionDialogProps>
         <AlertDialogContent>
           <AlertDialogTitle>Delete chat?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action will delete chat <span className="font-bold">Chat name</span>
+            This action will delete chat <span className="font-bold">{sessionName}</span>
           </AlertDialogDescription>
           <div className="flex justify-end gap-5">
             <AlertDialogCancel>
