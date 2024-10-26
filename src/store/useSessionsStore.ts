@@ -21,11 +21,12 @@ type SessionsState = {
   deleteSession: (id: string) => void;
   setMessage: (id: string, message: Message) => void;
   renameSession: (id: string, name: string) => void;
+  getSessionName: (id: string) => string | undefined;
 };
 
 export const useSessionStore = create<SessionsState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       sessions: [],
       createSession: (model) => {
         return set(
@@ -58,6 +59,13 @@ export const useSessionStore = create<SessionsState>()(
             }
           }),
         );
+      },
+      getSessionName: (id) => {
+        const name = get().sessions.find((session) => session.id === id)?.name;
+
+        if (name === "") return undefined;
+
+        return name;
       },
     }),
     { name: "sessions" },
