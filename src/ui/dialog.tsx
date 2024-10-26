@@ -18,13 +18,19 @@ const DialogContext = createContext<DialogContextType>({ isOpen: false });
 
 const Dialog: FC<ComponentPropsWithoutRef<typeof DialogPrimitive.Root>> = ({
   children,
+  open,
+  onOpenChange,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <DialogContext.Provider value={{ isOpen }}>
-      <DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen} {...props}>
+    <DialogContext.Provider value={{ isOpen: open ?? isOpen }}>
+      <DialogPrimitive.Root
+        open={open ?? isOpen}
+        onOpenChange={onOpenChange ?? setIsOpen}
+        {...props}
+      >
         {children}
       </DialogPrimitive.Root>
     </DialogContext.Provider>
