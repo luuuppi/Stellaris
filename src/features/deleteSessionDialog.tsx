@@ -6,44 +6,43 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/ui/alertDialog";
 import Button from "@/ui/button";
-import { forwardRef } from "react";
+import { type ComponentPropsWithoutRef, type FC } from "react";
 
 type DeleteSessionDialogProps = {
   sessionId: string;
   sessionName: string;
+} & ComponentPropsWithoutRef<typeof AlertDialog>;
+
+const DeleteSessionDialog: FC<DeleteSessionDialogProps> = ({
+  sessionId,
+  sessionName,
+  open,
+  onOpenChange,
+}) => {
+  const deleteSession = useSessionStore((state) => state.deleteSession);
+
+  return (
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
+      <AlertDialogContent>
+        <AlertDialogTitle>Delete chat?</AlertDialogTitle>
+        <AlertDialogDescription>
+          This action will delete chat <span className="font-bold">{sessionName}</span>
+        </AlertDialogDescription>
+        <div className="flex justify-end gap-5">
+          <AlertDialogCancel>
+            <Button variant="tertiary">Cancel</Button>
+          </AlertDialogCancel>
+          <AlertDialogAction>
+            <Button variant="danger" onClick={() => deleteSession(sessionId)}>
+              Delete
+            </Button>
+          </AlertDialogAction>
+        </div>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
 };
-
-const DeleteSessionDialog = forwardRef<HTMLDivElement, DeleteSessionDialogProps>(
-  ({ sessionId, sessionName }, ref) => {
-    const deleteSession = useSessionStore((state) => state.deleteSession);
-
-    return (
-      <AlertDialog>
-        <AlertDialogTrigger>
-          <div className="hidden" ref={ref} />
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogTitle>Delete chat?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action will delete chat <span className="font-bold">{sessionName}</span>
-          </AlertDialogDescription>
-          <div className="flex justify-end gap-5">
-            <AlertDialogCancel>
-              <Button variant="tertiary">Cancel</Button>
-            </AlertDialogCancel>
-            <AlertDialogAction>
-              <Button variant="danger" onClick={() => deleteSession(sessionId)}>
-                Delete
-              </Button>
-            </AlertDialogAction>
-          </div>
-        </AlertDialogContent>
-      </AlertDialog>
-    );
-  },
-);
 
 export default DeleteSessionDialog;
