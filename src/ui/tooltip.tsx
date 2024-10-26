@@ -19,16 +19,18 @@ const TooltipContext = createContext<TooltipContextType>({ isOpen: false });
 const Tooltip: FC<ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>> = ({
   children,
   delayDuration = 300,
+  open,
+  onOpenChange,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <TooltipContext.Provider value={{ isOpen }}>
+    <TooltipContext.Provider value={{ isOpen: open ?? isOpen }}>
       <TooltipPrimitive.Provider>
         <TooltipPrimitive.Root
-          open={isOpen}
-          onOpenChange={setIsOpen}
+          open={open ?? isOpen}
+          onOpenChange={onOpenChange ?? setIsOpen}
           delayDuration={delayDuration}
           {...props}
         >

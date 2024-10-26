@@ -24,13 +24,20 @@ const DropDownMenuContext = createContext<DropDownMenuContextType>({ isOpen: fal
 
 const DropDownMenu: FC<ComponentPropsWithoutRef<typeof RootPrimitive>> = ({
   children,
+  open,
+  onOpenChange,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <DropDownMenuContext.Provider value={{ isOpen }}>
-      <RootPrimitive open={isOpen} onOpenChange={setIsOpen} defaultOpen={false} {...props}>
+    <DropDownMenuContext.Provider value={{ isOpen: open ?? isOpen }}>
+      <RootPrimitive
+        open={open ?? isOpen}
+        onOpenChange={onOpenChange ?? setIsOpen}
+        defaultOpen={false}
+        {...props}
+      >
         {children}
       </RootPrimitive>
     </DropDownMenuContext.Provider>
