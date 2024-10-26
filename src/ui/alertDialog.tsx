@@ -18,19 +18,13 @@ const AlertDialogContext = createContext<AlertDialogContextType>({ isOpen: false
 
 const AlertDialog: FC<ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Root>> = ({
   children,
-  open,
-  onOpenChange,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <AlertDialogContext.Provider value={{ isOpen: open ?? isOpen }}>
-      <AlertDialogPrimitive.Root
-        open={open ?? isOpen}
-        onOpenChange={onOpenChange ?? setIsOpen}
-        {...props}
-      >
+    <AlertDialogContext.Provider value={{ isOpen }}>
+      <AlertDialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen} {...props}>
         {children}
       </AlertDialogPrimitive.Root>
     </AlertDialogContext.Provider>
