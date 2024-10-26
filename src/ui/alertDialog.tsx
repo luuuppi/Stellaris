@@ -42,7 +42,12 @@ const AlertDialogTrigger = forwardRef<
   ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Trigger>
 >(({ children, ...props }, ref) => {
   return (
-    <AlertDialogPrimitive.Trigger asChild ref={ref} {...props}>
+    <AlertDialogPrimitive.Trigger
+      onClick={(e) => e.stopPropagation()}
+      asChild
+      ref={ref}
+      {...props}
+    >
       {children}
     </AlertDialogPrimitive.Trigger>
   );
@@ -72,6 +77,7 @@ const AlertDialogContent = forwardRef<
           <AlertDialogPrimitive.Overlay
             asChild
             className="fixed inset-0 bg-night-900/40 backdrop-blur-sm"
+            onClick={(e) => e.stopPropagation()}
           >
             <motion.div
               key="overlay"

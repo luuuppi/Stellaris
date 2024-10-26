@@ -42,7 +42,7 @@ const DialogTrigger = forwardRef<
   ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger>
 >(({ children, ...props }, ref) => {
   return (
-    <DialogPrimitive.Trigger asChild ref={ref} {...props}>
+    <DialogPrimitive.Trigger onClick={(e) => e.stopPropagation()} asChild ref={ref} {...props}>
       {children}
     </DialogPrimitive.Trigger>
   );
@@ -71,6 +71,7 @@ const DialogContent = forwardRef<
         <DialogPrimitive.Portal forceMount>
           <DialogPrimitive.Overlay
             className="fixed inset-0 bg-night-900/40 backdrop-blur-sm"
+            onClick={(e) => e.stopPropagation()}
             asChild
           >
             <motion.div

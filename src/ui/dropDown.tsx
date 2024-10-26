@@ -119,6 +119,7 @@ const DropDownMenuItem = forwardRef<
   return (
     <ItemPrimitive
       className="flex cursor-pointer items-center justify-start gap-1 rounded-md p-1 text-white outline-none transition-colors duration-200 ease-in-out active:bg-night-500 data-[highlighted]:bg-night-600"
+      onClick={(e) => e.stopPropagation()}
       asChild
       ref={ref}
       {...props}
