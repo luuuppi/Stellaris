@@ -58,7 +58,7 @@ const RenameSessionDialog: FC<RenameSessionDialogProps> = ({
             id="chatNameInput"
             placeholder="New chat name"
           />
-          <Button className="mt-3 flex w-full items-center justify-center">Save</Button>
+          <Button className="mt-3 w-full">Save</Button>
         </form>
         <DialogClose>
           <div className="hidden" ref={closeRef} />
