@@ -1,7 +1,8 @@
 import { Ollama } from "ollama/browser";
+import { useSettingsStore } from "./store/useSettingsStore";
 
-const DEFAULT_OLLAMA_SERVER = "http://127.0.0.1:11434";
+const ollamaServer = useSettingsStore((state) => state.ollamaServer);
 
-const ollama = new Ollama({ host: DEFAULT_OLLAMA_SERVER });
+const ollama = new Ollama({ host: ollamaServer });
 
 export default ollama;
