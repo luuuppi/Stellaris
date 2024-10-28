@@ -8,6 +8,7 @@ type SettingsState = {
   ollamaServer: string;
   setModel: (newModel: string) => void;
   setOllamaServer: (newServer: string) => void;
+  resetSettings: () => void;
 };
 
 export const useSettingsStore = create<SettingsState>()(
@@ -17,6 +18,7 @@ export const useSettingsStore = create<SettingsState>()(
       ollamaServer: DEFAULT_OLLAMA_SERVER,
       setModel: (newModel) => set(() => ({ model: newModel })),
       setOllamaServer: (newServer) => set(() => ({ ollamaServer: newServer })),
+      resetSettings: () => set(() => ({ model: "", ollamaServer: DEFAULT_OLLAMA_SERVER })),
     }),
     { name: "settings" },
   ),
