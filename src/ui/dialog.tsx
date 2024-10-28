@@ -1,3 +1,4 @@
+import cn from "@/utils/cn";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import {
@@ -62,7 +63,7 @@ const contentAnimation: Variants = {
 const DialogContent = forwardRef<
   ElementRef<typeof DialogPrimitive.Content>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ children, ...props }, ref) => {
+>(({ children, className, ...props }, ref) => {
   const { isOpen } = useContext(DialogContext);
 
   return (
@@ -81,7 +82,10 @@ const DialogContent = forwardRef<
               exit="closed"
             >
               <DialogPrimitive.Content
-                className="fixed left-1/2 top-1/2 max-w-[600px] !translate-x-[-50%] !translate-y-[-50%] rounded-xl border border-night-700 bg-night-900 p-6 text-white shadow-xl shadow-night-950"
+                className={cn(
+                  "fixed left-1/2 top-1/2 !translate-x-[-50%] !translate-y-[-50%] rounded-xl border border-night-700 bg-night-900 p-6 text-white shadow-xl shadow-night-950",
+                  className,
+                )}
                 asChild
                 ref={ref}
                 {...props}
@@ -106,9 +110,13 @@ const DialogContent = forwardRef<
 const DialogTitle = forwardRef<
   ElementRef<typeof DialogPrimitive.Title>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ children, ...props }, ref) => {
+>(({ children, className, ...props }, ref) => {
   return (
-    <DialogPrimitive.Title className="text-lg font-semibold" ref={ref} {...props}>
+    <DialogPrimitive.Title
+      className={cn("text-lg font-semibold", className)}
+      ref={ref}
+      {...props}
+    >
       {children}
     </DialogPrimitive.Title>
   );
@@ -117,9 +125,9 @@ const DialogTitle = forwardRef<
 const DialogDescription = forwardRef<
   ElementRef<typeof DialogPrimitive.Description>,
   ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ children, ...props }, ref) => {
+>(({ children, className, ...props }, ref) => {
   return (
-    <DialogPrimitive.Description className="my-3" ref={ref} {...props}>
+    <DialogPrimitive.Description className={cn("my-3", className)} ref={ref} {...props}>
       {children}
     </DialogPrimitive.Description>
   );
