@@ -22,6 +22,7 @@ type SessionsState = {
   setMessage: (id: string, message: Message) => void;
   renameSession: (id: string, name: string) => void;
   getSessionName: (id: string) => string | undefined;
+  clearSessions: () => void;
 };
 
 export const useSessionStore = create<SessionsState>()(
@@ -66,6 +67,9 @@ export const useSessionStore = create<SessionsState>()(
         if (name === "") return undefined;
 
         return name;
+      },
+      clearSessions: () => {
+        return set(() => ({ sessions: [] }));
       },
     }),
     { name: "sessions" },
