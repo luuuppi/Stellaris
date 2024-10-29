@@ -20,11 +20,11 @@ const messageBodyStyles = cva("rounded-lg bg-night-800 px-5 py-3", {
   },
 });
 
-type MessageProps = {
+type MessageComponentProps = {
   children: ReactNode;
 } & VariantProps<typeof messageStyles>;
 
-const Message: FC<MessageProps> = ({ children, role }) => {
+const MessageComponent: FC<MessageComponentProps> = ({ children, role }) => {
   return (
     <div className={messageStyles({ role })}>
       <div className="flex h-12 min-w-12 items-center justify-center rounded-full bg-night-50 text-black">
@@ -35,4 +35,4 @@ const Message: FC<MessageProps> = ({ children, role }) => {
   );
 };
 
-export default Message;
+export default MessageComponent;
