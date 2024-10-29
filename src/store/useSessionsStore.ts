@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type Message = {
+export type Message = {
   role: "user" | "assistant" | "system";
   content: string;
 };
@@ -23,6 +23,7 @@ type SessionsState = {
   renameSession: (id: string, name: string) => void;
   getSessionName: (id: string) => string | undefined;
   clearSessions: () => void;
+  getSessionMessages: (id: string) => Message[] | undefined;
 };
 
 export const useSessionStore = create<SessionsState>()(
@@ -70,6 +71,9 @@ export const useSessionStore = create<SessionsState>()(
       },
       clearSessions: () => {
         return set(() => ({ sessions: [] }));
+      },
+      getSessionMessages: (id) => {
+        return get().sessions.find((session) => session.id === id)?.messages;
       },
     }),
     { name: "sessions" },
