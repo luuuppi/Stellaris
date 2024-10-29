@@ -4,7 +4,7 @@ import RootLayout from "./pages/rootLayout";
 import SessionPage from "./pages/sessionPage";
 import SessionsLayout from "./pages/sessionsLayout";
 import SessionsPage from "./pages/sessionsPage";
-import SettingsPage from "./pages/settingsPage";
+import SettingsPage from "./pages/settingsPage/settingsPage";
 
 const rootRoute = createRootRoute({
   component: RootLayout,
