@@ -1,7 +1,7 @@
 import { createRootRoute, createRoute, redirect } from "@tanstack/react-router";
 import IndexPage from "./pages/indexPage";
 import RootLayout from "./pages/rootLayout";
-import SessionPage from "./pages/sessionPage";
+import SessionPage from "./pages/sessionPage/sessionPage";
 import SessionsLayout from "./pages/sessionsLayout";
 import SessionsPage from "./pages/sessionsPage";
 import SettingsPage from "./pages/settingsPage/settingsPage";
