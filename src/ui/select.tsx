@@ -51,7 +51,7 @@ type SelectTriggerProps = {
 } & ComponentPropsWithoutRef<typeof TriggerPrimitive>;
 
 const SelectTrigger = forwardRef<ElementRef<typeof TriggerPrimitive>, SelectTriggerProps>(
-  ({ label, className, ...props }, ref) => {
+  ({ label, value, className, ...props }, ref) => {
     const { isOpen } = useContext(SelectContext);
 
     return (
@@ -63,7 +63,7 @@ const SelectTrigger = forwardRef<ElementRef<typeof TriggerPrimitive>, SelectTrig
         {...props}
         ref={ref}
       >
-        <ValuePrimitive placeholder={label} />
+        <ValuePrimitive placeholder={label}>{value}</ValuePrimitive>
         <IconPrimitive asChild>
           <ChevronDown
             data-open={isOpen}
