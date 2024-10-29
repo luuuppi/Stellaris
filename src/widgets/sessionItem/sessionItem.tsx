@@ -17,6 +17,7 @@ const SessionItem: FC<SessionItemProps> = ({ title, sessionId, isSelected }) => 
     <>
       <Link
         to={`/sessions/${sessionId}`}
+        params={{ sessionId }}
         data-selected={isSelected}
         className="flex w-full cursor-pointer items-center justify-between rounded-xl p-3 transition-colors duration-200 ease-in-out hover:bg-night-700/50 active:bg-night-700/30 data-[selected=true]:bg-accent-500/30 data-[selected=true]:hover:bg-accent-500/25 data-[selected=true]:active:bg-accent-500/20"
       >
