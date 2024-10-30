@@ -33,6 +33,7 @@ const MessageForm: FC<MessageFormProps> = ({ id }) => {
       <Input
         className="w-full"
         id="messageInput"
+        placeholder="Write a message..."
         value={value}
         onChange={changeHandler}
         autoComplete="off"
