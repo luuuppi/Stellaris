@@ -8,6 +8,7 @@ import {
   AlertDialogTitle,
 } from "@/ui/alertDialog";
 import Button from "@/ui/button";
+import { useNavigate } from "@tanstack/react-router";
 import { type ComponentPropsWithoutRef, type FC } from "react";
 
 type DeleteSessionDialogProps = {
@@ -21,7 +22,13 @@ const DeleteSessionDialog: FC<DeleteSessionDialogProps> = ({
   open,
   onOpenChange,
 }) => {
+  const navigate = useNavigate();
   const deleteSession = useSessionStore((state) => state.deleteSession);
+
+  const deleteHandler = (sessionId: string) => {
+    deleteSession(sessionId);
+    navigate({ to: "/sessions" });
+  };
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
@@ -35,7 +42,7 @@ const DeleteSessionDialog: FC<DeleteSessionDialogProps> = ({
             <Button variant="tertiary">Cancel</Button>
           </AlertDialogCancel>
           <AlertDialogAction>
-            <Button variant="danger" onClick={() => deleteSession(sessionId)}>
+            <Button variant="danger" onClick={() => deleteHandler(sessionId)}>
               Delete
             </Button>
           </AlertDialogAction>
