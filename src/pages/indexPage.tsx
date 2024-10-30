@@ -1,5 +1,4 @@
 import { type FC } from "react";
-import { createFileRoute } from "@tanstack/react-router";
 
 const IndexPage: FC = () => {
   return (
@@ -9,6 +8,4 @@ const IndexPage: FC = () => {
   );
 };
 
-export const Route = createFileRoute("/")({
-  component: IndexPage,
-});
+export default IndexPage;
