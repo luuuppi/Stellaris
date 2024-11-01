@@ -49,18 +49,21 @@ const SettingsPage: FC = () => {
   return (
     <Dialog open onOpenChange={onOpenChange}>
       <DialogContent className="min-w-[42rem] max-w-4xl">
-        <div className="flex items-center justify-between">
+        <header className="flex items-center justify-between">
           <DialogTitle className="text-2xl font-bold">Settings</DialogTitle>
           <DialogClose>
             <Button variant="tertiary" size="icon_sm">
               <X size={20} />
             </Button>
           </DialogClose>
-        </div>
+        </header>
         <div className="my-5 h-[1px] w-full bg-night-600" />
         <DialogDescription className="hidden">Settins page</DialogDescription>
-        <ServerInput serverStatus={serverStatus} />
-        <ModelSelect models={models} serverStatus={serverStatus} />
+        <div className="flex flex-col gap-3">
+          <span className="font-semibold">Ollama</span>
+          <ServerInput serverStatus={serverStatus} />
+          <ModelSelect models={models} serverStatus={serverStatus} />
+        </div>
         <div className="mt-3 flex flex-col gap-3">
           <span className="font-semibold">Danger zone</span>
           <Button variant="danger" className="w-full" onClick={() => resetSettings()}>

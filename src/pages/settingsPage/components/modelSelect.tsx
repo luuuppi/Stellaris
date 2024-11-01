@@ -1,6 +1,6 @@
 import { useSettingsStore } from "@/store/useSettingsStore";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/ui/select";
-import { ModelResponse } from "ollama/browser";
+import { type ModelResponse } from "ollama/browser";
 import { type FC } from "react";
 
 type ModelSelectProps = {
