@@ -62,6 +62,19 @@ const SettingsPage: FC = () => {
         <div className="flex flex-col gap-3">
           <span className="font-semibold">Ollama</span>
           <ServerInput serverStatus={serverStatus} />
+          {serverStatus === "disconnected" && (
+            <p>
+              Allow connections from <code>https://ollama-hub.vercel.app</code> in your Ollama
+              server settings.{" "}
+              <a
+                className="underline decoration-white decoration-1 underline-offset-4 transition-colors duration-200 ease-in-out hover:text-accent-200 hover:decoration-accent-200"
+                href="https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-allow-additional-web-origins-to-access-ollama"
+                target="_blank"
+              >
+                See docs
+              </a>
+            </p>
+          )}
           <ModelSelect models={models} serverStatus={serverStatus} />
         </div>
         <div className="mt-3 flex flex-col gap-3">
