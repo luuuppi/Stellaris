@@ -25,6 +25,8 @@ const SettingsPage: FC = () => {
     "disconnected",
   );
   const [models, setModels] = useState<ModelResponse[]>([]);
+  const model = useSettingsStore((state) => state.model);
+  const [isSelectValid, setIsSelectValid] = useState<boolean>(true);
 
   const getModels = async () => {
     try {
@@ -41,6 +43,11 @@ const SettingsPage: FC = () => {
   }, [ollamaServer]);
 
   const onOpenChange = (open: boolean) => {
+    if (!model) {
+      setIsSelectValid(false);
+      return;
+    }
+
     if (!open) {
       navigate({ to: "/sessions" });
     }
@@ -75,7 +82,12 @@ const SettingsPage: FC = () => {
               </a>
             </p>
           )}
-          <ModelSelect models={models} serverStatus={serverStatus} />
+          <ModelSelect
+            models={models}
+            serverStatus={serverStatus}
+            isValid={isSelectValid}
+            setIsValid={setIsSelectValid}
+          />
         </div>
         <div className="mt-3 flex flex-col gap-3">
           <span className="font-semibold">Danger zone</span>
