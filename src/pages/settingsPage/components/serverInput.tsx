@@ -1,8 +1,7 @@
 import { useSettingsStore } from "@/store/useSettingsStore";
 import Input from "@/ui/input";
 import cn from "@/utils/cn";
-import Label from "@ui/label";
-import { ChangeEvent, useCallback, type FC } from "react";
+import { useCallback, type ChangeEvent, type FC } from "react";
 
 type ServerInputProps = {
   serverStatus: "connected" | "disconnected";
@@ -17,10 +16,7 @@ const ServerInput: FC<ServerInputProps> = ({ serverStatus }) => {
   }, []);
 
   return (
-    <div className="relative mb-3">
-      <Label className="mb-2 inline-block text-base font-bold" htmlFor="ollamaServerInput">
-        Ollama
-      </Label>
+    <div className="relative">
       <Input
         className="w-full"
         id="ollamaServerInput"
@@ -29,7 +25,7 @@ const ServerInput: FC<ServerInputProps> = ({ serverStatus }) => {
       />
       <span
         className={cn(
-          "absolute right-5 top-10",
+          "absolute right-5 top-2",
           serverStatus === "connected" ? "text-green-500" : "text-red-500",
         )}
       >

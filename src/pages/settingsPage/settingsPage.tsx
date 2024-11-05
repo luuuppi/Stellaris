@@ -25,6 +25,8 @@ const SettingsPage: FC = () => {
     "disconnected",
   );
   const [models, setModels] = useState<ModelResponse[]>([]);
+  const model = useSettingsStore((state) => state.model);
+  const [isSelectValid, setIsSelectValid] = useState<boolean>(true);
 
   const getModels = async () => {
     try {
@@ -41,6 +43,11 @@ const SettingsPage: FC = () => {
   }, [ollamaServer]);
 
   const onOpenChange = (open: boolean) => {
+    if (!model) {
+      setIsSelectValid(false);
+      return;
+    }
+
     if (!open) {
       navigate({ to: "/sessions" });
     }
@@ -49,18 +56,39 @@ const SettingsPage: FC = () => {
   return (
     <Dialog open onOpenChange={onOpenChange}>
       <DialogContent className="min-w-[42rem] max-w-4xl">
-        <div className="flex items-center justify-between">
+        <header className="flex items-center justify-between">
           <DialogTitle className="text-2xl font-bold">Settings</DialogTitle>
           <DialogClose>
             <Button variant="tertiary" size="icon_sm">
               <X size={20} />
             </Button>
           </DialogClose>
-        </div>
+        </header>
         <div className="my-5 h-[1px] w-full bg-night-600" />
         <DialogDescription className="hidden">Settins page</DialogDescription>
-        <ServerInput serverStatus={serverStatus} />
-        <ModelSelect models={models} serverStatus={serverStatus} />
+        <div className="flex flex-col gap-3">
+          <span className="font-semibold">Ollama</span>
+          <ServerInput serverStatus={serverStatus} />
+          {serverStatus === "disconnected" && (
+            <p>
+              Allow connections from <code>https://ollama-hub.vercel.app</code> in your Ollama
+              server settings.{" "}
+              <a
+                className="underline decoration-white decoration-1 underline-offset-4 transition-colors duration-200 ease-in-out hover:text-accent-200 hover:decoration-accent-200"
+                href="https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-allow-additional-web-origins-to-access-ollama"
+                target="_blank"
+              >
+                See docs
+              </a>
+            </p>
+          )}
+          <ModelSelect
+            models={models}
+            serverStatus={serverStatus}
+            isValid={isSelectValid}
+            setIsValid={setIsSelectValid}
+          />
+        </div>
         <div className="mt-3 flex flex-col gap-3">
           <span className="font-semibold">Danger zone</span>
           <Button variant="danger" className="w-full" onClick={() => resetSettings()}>

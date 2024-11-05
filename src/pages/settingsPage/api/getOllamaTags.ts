@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ListResponse } from "ollama/browser";
+import { type ListResponse } from "ollama/browser";
 
 const getOllamaTags = async (ollamaServer: string) => {
   try {
