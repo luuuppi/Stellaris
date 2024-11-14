@@ -4,7 +4,7 @@ import Input from "@/ui/input";
 import { SendHorizontal } from "lucide-react";
 import { type ChangeEvent, type FC, type FormEvent, useCallback, useState } from "react";
 import useOllamaChat from "../model/useOllamaChat";
-import completionStore from "../store/completionStore";
+import completionStore from "../model/store/completionStore";
 
 type MessageFormProps = {
   id: string;
