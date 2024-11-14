@@ -1,10 +1,10 @@
 import { useSessionStore } from "@/store/useSessionsStore";
-import { useSettingsStore } from "@/store/useSettingsStore";
 import Button from "@/ui/button";
 import Input from "@/ui/input";
 import { SendHorizontal } from "lucide-react";
 import { type ChangeEvent, type FC, type FormEvent, useCallback, useState } from "react";
-import postMessageToOllama from "../api/postMessageToOllama";
+import useOllamaChat from "../model/useOllamaChat";
+import completionStore from "../model/store/completionStore";
 
 type MessageFormProps = {
   id: string;
@@ -12,10 +12,13 @@ type MessageFormProps = {
 
 const MessageForm: FC<MessageFormProps> = ({ id }) => {
   const [value, setValue] = useState<string>("");
-  const model = useSessionStore((state) => state.sessions.find((s) => s.id === id)?.model);
-  const server = useSettingsStore((state) => state.ollamaServer);
   const setMessage = useSessionStore((state) => state.setMessage);
-  const getMessages = useSessionStore((state) => state.getSessionMessages);
+  const ollamaChat = useOllamaChat({
+    id,
+    onChunk: (value) => {
+      completionStore.completion += value;
+    },
+  });
 
   const changeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -25,7 +28,7 @@ const MessageForm: FC<MessageFormProps> = ({ id }) => {
     e.preventDefault();
     setMessage(id, { role: "user", content: value });
     setValue("");
-    postMessageToOllama(id, server, model as string, getMessages, setMessage);
+    ollamaChat();
   };
 
   return (
