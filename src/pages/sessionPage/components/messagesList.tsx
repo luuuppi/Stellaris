@@ -14,7 +14,7 @@ const MessagesList: FC<MessagesListProps> = ({ messages }) => {
 
   return (
     <StickToBottom className="flex flex-1 overflow-auto" resize="smooth" initial="smooth">
-      <StickToBottom.Content className="flex flex-col gap-5 px-20 py-8">
+      <StickToBottom.Content className="mx-auto flex max-w-[50rem] flex-col gap-5 px-3 py-8">
         {messages.map((message, index) => (
           <MessageComponent key={index} role={message.role === "user" ? "user" : "assistant"}>
             {message.content}
