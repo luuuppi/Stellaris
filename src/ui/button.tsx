@@ -12,6 +12,7 @@ const buttonStyles = cva(
     variants: {
       variant: {
         primary: "bg-accent-600 hover:bg-accent-700 active:bg-accent-800",
+        secondary: "text-white border border-night-500 bg-night-800 hover:bg-night-700",
         tertiary: "text-night-300 hover:bg-night-700/30 active:bg-night-700/50",
         danger: "bg-red-500 hover:bg-red-600 active:bg-red-700",
       },
