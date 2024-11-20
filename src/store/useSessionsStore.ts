@@ -17,7 +17,7 @@ type Session = {
 
 type SessionsState = {
   sessions: Session[];
-  createSession: (model: string) => void;
+  createSession: (model: string) => string;
   deleteSession: (id: string) => void;
   setMessage: (id: string, message: Message) => void;
   renameSession: (id: string, name: string) => void;
@@ -31,11 +31,15 @@ export const useSessionStore = create<SessionsState>()(
     (set, get) => ({
       sessions: [],
       createSession: (model) => {
-        return set(
+        const id = generateId();
+
+        set(
           produce((state: SessionsState) => {
-            state.sessions.push({ id: generateId(), name: "", messages: [], model });
+            state.sessions.push({ id, name: "", messages: [], model });
           }),
         );
+
+        return id;
       },
       deleteSession: (id) => {
         return set((state) => ({

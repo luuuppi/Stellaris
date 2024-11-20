@@ -40,6 +40,7 @@ const MessageForm: FC<MessageFormProps> = ({ id }) => {
         value={value}
         onChange={changeHandler}
         autoComplete="off"
+        autoFocus
       />
       <Button size="icon_md">
         <SendHorizontal />
