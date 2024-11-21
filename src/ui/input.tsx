@@ -6,7 +6,7 @@ const Input = forwardRef<ElementRef<"input">, ComponentPropsWithoutRef<"input">>
     return (
       <input
         className={cn(
-          "rounded-xl border border-night-600 bg-night-800 p-2 focus:outline-none",
+          "rounded-xl border border-night-600 bg-night-800 p-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
           className,
         )}
         ref={ref}
