@@ -14,8 +14,10 @@ const usePullOllamaModel = (onChunk: (value: ProgressResponse & ErrorResponse) =
       const abortController = new AbortController();
       abortControllerRef.current = abortController;
 
+      const normalizedModelName = model.replace(/\s+/g, "").toLowerCase();
+
       try {
-        await pullOllamaModel(server, model, onChunk, abortController.signal);
+        await pullOllamaModel(server, normalizedModelName, onChunk, abortController.signal);
       } catch (e) {
         if (e instanceof Error) {
           pullingStore.data.error = e.message;
@@ -31,6 +33,14 @@ const usePullOllamaModel = (onChunk: (value: ProgressResponse & ErrorResponse) =
     abortControllerRef.current?.abort();
     abortControllerRef.current = null;
     pullingStore.isPullingInProgress = false;
+    pullingStore.data.status = "";
+    pullingStore.data.digest = "";
+    pullingStore.data.total = 0;
+    pullingStore.data.completed = 0;
+
+    setTimeout(() => {
+      pullingStore.data.error = "";
+    }, 2500);
   }, []);
 
   return { pullModel, abortPulling };
