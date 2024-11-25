@@ -7,14 +7,16 @@ import {
 } from "react";
 
 const buttonStyles = cva(
-  "transition-colors duration-150 ease-in-out font-medium flex items-center justify-center",
+  "transition-colors duration-150 ease-in-out font-medium flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
-        primary: "bg-accent-600 hover:bg-accent-700 active:bg-accent-800",
-        secondary: "text-white border border-night-500 bg-night-800 hover:bg-night-700",
-        tertiary: "text-night-300 hover:bg-night-700/30 active:bg-night-700/50",
-        danger: "bg-red-500 hover:bg-red-600 active:bg-red-700",
+        primary: "bg-accent-600 enabled:hover:bg-accent-700 enabled:active:bg-accent-800",
+        secondary:
+          "text-white border border-night-500 bg-night-800 enabled:hover:bg-night-700",
+        tertiary:
+          "text-night-300 enabled:hover:bg-night-700/30 enabled:active:bg-night-700/50",
+        danger: "bg-red-500 enabled:hover:bg-red-600 enabled:active:bg-red-700",
       },
       size: {
         md: "flex gap-1 rounded-xl px-6 py-3",

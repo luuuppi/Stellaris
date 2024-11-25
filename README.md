@@ -2,14 +2,15 @@
 
 ### ⭐ Main features
 
-- Chating with Ollama models via web web UI 
+- Chating with Ollama models via web UI 
 - Storing all data locally on your browser
 - Streaming response in real-time
 - Markdown parsing with syntax highlighting
+- Installing models via web UI
 
 ## 🧐 How to use?
 1. Install [Ollama](https://ollama.com/download)
-2. Install model you want via the console (installing models via UI will be in the next versions)
+2. Install model you want ([Full list of models](https://ollama.com/models))
 3. Go to the [web app](https://ollama-hub.vercel.app) (no registration required)
 4. Enjoy!
 

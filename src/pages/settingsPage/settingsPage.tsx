@@ -15,6 +15,7 @@ import { useEffect, useState, type FC } from "react";
 import getOllamaTags from "./api/getOllamaTags";
 import ModelSelect from "./components/modelSelect";
 import ServerInput from "./components/serverInput";
+import PullModelInput from "./components/pullModelInput";
 
 const SettingsPage: FC = () => {
   const navigate = useNavigate();
@@ -88,6 +89,7 @@ const SettingsPage: FC = () => {
             isValid={isSelectValid}
             setIsValid={setIsSelectValid}
           />
+          <PullModelInput serverStatus={serverStatus} refetchModels={getModels} />
         </div>
         <div className="mt-3 flex flex-col gap-3">
           <span className="font-semibold">Danger zone</span>

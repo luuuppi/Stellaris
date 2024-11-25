@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { Bot, UserRound } from "lucide-react";
-import { type FC, type ReactNode } from "react";
+import { memo, type FC, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import CodeBlock from "./codeBlock";
 
@@ -26,7 +26,7 @@ type MessageComponentProps = {
   children: ReactNode;
 } & VariantProps<typeof messageStyles>;
 
-const MessageComponent: FC<MessageComponentProps> = ({ children, role }) => {
+const MessageComponent: FC<MessageComponentProps> = memo(({ children, role }) => {
   return (
     <div className={messageStyles({ role })}>
       <div className="flex h-12 min-w-12 items-center justify-center rounded-full bg-night-50 text-black">
@@ -63,6 +63,6 @@ const MessageComponent: FC<MessageComponentProps> = ({ children, role }) => {
       />
     </div>
   );
-};
+});
 
 export default MessageComponent;
