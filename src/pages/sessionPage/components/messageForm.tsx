@@ -50,33 +50,35 @@ const MessageForm: FC<MessageFormProps> = ({ id }) => {
   };
 
   return (
-    <form
-      className="mx-20 mb-8 flex rounded-xl border border-night-600 bg-night-800 contain-inline-size"
-      onSubmit={submitHandler}
-      ref={formRef}
-    >
-      <div className="flex w-full items-center gap-1 p-1 pl-2">
-        <textarea
-          className="field-sizing-content better-scrollbar max-h-[10rem] w-full resize-none bg-night-800 leading-[160%] focus:outline-none"
-          rows={1}
-          id="messageInput"
-          placeholder="Write a message..."
-          value={value}
-          onChange={changeHandler}
-          onKeyDown={handleKeyDown}
-          autoComplete="off"
-          autoFocus
-        />
-        <Button
-          className="h-full"
-          size="icon_sm"
-          type="submit"
-          disabled={value === "" ? true : false}
-        >
-          <SendHorizontal />
-        </Button>
-      </div>
-    </form>
+    <div className="mx-auto mb-8 w-full max-w-[50rem] px-3">
+      <form
+        className="flex rounded-xl border border-night-600 bg-night-800 contain-inline-size"
+        onSubmit={submitHandler}
+        ref={formRef}
+      >
+        <div className="flex w-full items-center gap-1 p-1 pl-2">
+          <textarea
+            className="field-sizing-content better-scrollbar max-h-[10rem] w-full resize-none bg-night-800 leading-[160%] focus:outline-none"
+            rows={1}
+            id="messageInput"
+            placeholder="Write a message..."
+            value={value}
+            onChange={changeHandler}
+            onKeyDown={handleKeyDown}
+            autoComplete="off"
+            autoFocus
+          />
+          <Button
+            className="h-full"
+            size="icon_sm"
+            type="submit"
+            disabled={value === "" ? true : false}
+          >
+            <SendHorizontal />
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 
