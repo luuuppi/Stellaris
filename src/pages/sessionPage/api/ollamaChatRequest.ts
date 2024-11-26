@@ -4,13 +4,14 @@ import { type ChatResponse } from "ollama/browser";
 const ollamaChatRequest = async (
   server: string,
   payload: Message[],
+  model: string,
   onChunk: (value: string) => void,
 ) => {
   const response = await fetch(`${server}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "text/event-stream" },
     body: JSON.stringify({
-      model: "phi3.5:latest",
+      model,
       messages: payload,
       stream: true,
     }),

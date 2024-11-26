@@ -24,6 +24,7 @@ type SessionsState = {
   getSessionName: (id: string) => string | undefined;
   clearSessions: () => void;
   getSessionMessages: (id: string) => Message[] | undefined;
+  getModel: (id: string) => string;
 };
 
 export const useSessionStore = create<SessionsState>()(
@@ -78,6 +79,9 @@ export const useSessionStore = create<SessionsState>()(
       },
       getSessionMessages: (id) => {
         return get().sessions.find((session) => session.id === id)?.messages;
+      },
+      getModel: (id) => {
+        return get().sessions.find((session) => session.id === id)?.model ?? "";
       },
     }),
     { name: "sessions" },

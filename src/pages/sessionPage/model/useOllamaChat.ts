@@ -13,13 +13,15 @@ const useOllamaChat = (args: useOllamaChatArgs) => {
   const server = useSettingsStore((state) => state.ollamaServer);
   const getMessages = useSessionStore((state) => state.getSessionMessages);
   const setMessage = useSessionStore((state) => state.setMessage);
+  const getModel = useSessionStore((state) => state.getModel);
 
   const ollamaChat = async () => {
     try {
       const messages = getMessages(id);
+      const model = getModel(id);
 
       completionStore.isCompletionInProgress = true;
-      await ollamaChatRequest(server, messages ?? [], onChunk);
+      await ollamaChatRequest(server, messages ?? [], model, onChunk);
 
       setMessage(id, { role: "assistant", content: completionStore.completion });
       completionStore.isCompletionInProgress = false;
