@@ -1,6 +1,6 @@
 import { useSessionStore } from "@/store/useSessionsStore";
 import Button from "@/ui/button";
-import { SendHorizontal } from "lucide-react";
+import { SendHorizontal, Square } from "lucide-react";
 import {
   type ChangeEvent,
   type FC,
@@ -12,6 +12,7 @@ import {
 } from "react";
 import completionStore from "../model/store/completionStore";
 import useOllamaChat from "../model/useOllamaChat";
+import { useSnapshot } from "valtio";
 
 type MessageFormProps = {
   id: string;
@@ -21,7 +22,8 @@ const MessageForm: FC<MessageFormProps> = ({ id }) => {
   const [value, setValue] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const setMessage = useSessionStore((state) => state.setMessage);
-  const ollamaChat = useOllamaChat({
+  const completionSnap = useSnapshot(completionStore);
+  const { ollamaChat, abortChat } = useOllamaChat({
     id,
     onChunk: (value) => {
       completionStore.completion += value;
@@ -68,14 +70,21 @@ const MessageForm: FC<MessageFormProps> = ({ id }) => {
             autoComplete="off"
             autoFocus
           />
-          <Button
-            className="h-full"
-            size="icon_sm"
-            type="submit"
-            disabled={value === "" ? true : false}
-          >
-            <SendHorizontal />
-          </Button>
+          {!completionSnap.isCompletionInProgress && (
+            <Button
+              className="h-full"
+              size="icon_sm"
+              type="submit"
+              disabled={value === "" ? true : false}
+            >
+              <SendHorizontal />
+            </Button>
+          )}
+          {completionSnap.isCompletionInProgress && (
+            <Button className="h-full" size="icon_sm" type="button" onClick={abortChat}>
+              <Square fill="white" />
+            </Button>
+          )}
         </div>
       </form>
     </div>

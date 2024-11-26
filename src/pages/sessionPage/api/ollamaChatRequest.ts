@@ -6,6 +6,7 @@ const ollamaChatRequest = async (
   payload: Message[],
   model: string,
   onChunk: (value: string) => void,
+  signal: AbortSignal,
 ) => {
   const response = await fetch(`${server}/api/chat`, {
     method: "POST",
@@ -15,6 +16,7 @@ const ollamaChatRequest = async (
       messages: payload,
       stream: true,
     }),
+    signal,
   });
 
   if (!response.body) return;
