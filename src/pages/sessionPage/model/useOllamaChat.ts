@@ -2,6 +2,7 @@ import { useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import ollamaChatRequest from "../api/ollamaChatRequest";
 import completionStore from "../model/store/completionStore";
+import { useRef } from "react";
 
 type useOllamaChatArgs = {
   id: string;
@@ -14,14 +15,18 @@ const useOllamaChat = (args: useOllamaChatArgs) => {
   const getMessages = useSessionStore((state) => state.getSessionMessages);
   const setMessage = useSessionStore((state) => state.setMessage);
   const getModel = useSessionStore((state) => state.getModel);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const ollamaChat = async () => {
     try {
       const messages = getMessages(id);
       const model = getModel(id);
 
+      const abortController = new AbortController();
+      abortControllerRef.current = abortController;
+
       completionStore.isCompletionInProgress = true;
-      await ollamaChatRequest(server, messages ?? [], model, onChunk);
+      await ollamaChatRequest(server, messages ?? [], model, onChunk, abortController.signal);
 
       setMessage(id, { role: "assistant", content: completionStore.completion });
       completionStore.isCompletionInProgress = false;
@@ -35,7 +40,16 @@ const useOllamaChat = (args: useOllamaChatArgs) => {
     }
   };
 
-  return ollamaChat;
+  const abortChat = () => {
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
+
+    setMessage(id, { role: "assistant", content: completionStore.completion });
+    completionStore.isCompletionInProgress = false;
+    completionStore.completion = "";
+  };
+
+  return { ollamaChat, abortChat };
 };
 
 export default useOllamaChat;

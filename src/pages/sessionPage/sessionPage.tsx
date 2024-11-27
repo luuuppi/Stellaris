@@ -12,8 +12,8 @@ const SessionPage: FC = () => {
   );
 
   return (
-    <section className="flex w-full flex-col">
-      <Header name={session?.name ?? sessionId} id={sessionId} />
+    <section className="flex w-full min-w-0 flex-col">
+      <Header name={session?.name ?? sessionId} model={session?.model ?? ""} id={sessionId} />
       <MessagesList messages={session?.messages ?? []} />
       <MessageForm id={sessionId} />
     </section>
