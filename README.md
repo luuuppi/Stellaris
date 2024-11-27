@@ -10,8 +10,8 @@
 
 ## 🧐 How to use?
 1. Install [Ollama](https://ollama.com/download)
-2. Install model you want ([Full list of models](https://ollama.com/models))
-3. Go to the [web app](https://ollama-hub.vercel.app) (no registration required)
+2. Go to the [web app](https://ollama-hub.vercel.app) (no registration required)
+3. Install model you want ([Full list of models](https://ollama.com/models))
 4. Enjoy!
 
 ## 🔧 Tech stack
