@@ -92,7 +92,7 @@ const DropdownMenuContent = forwardRef<
             {...props}
           >
             <motion.div
-              className="flex origin-[var(--radix-dropdown-menu-content-transform-origin)] flex-col justify-center gap-1 rounded-lg border border-night-700 bg-night-900 p-2"
+              className="flex origin-[var(--radix-dropdown-menu-content-transform-origin)] flex-col justify-center gap-1 rounded-xl border border-night-700 bg-night-900 p-2"
               variants={dropdownMenuContentAnimation}
               initial="closed"
               animate="opened"
