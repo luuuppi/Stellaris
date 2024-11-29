@@ -1,11 +1,11 @@
 import DeleteSessionDialog from "@/features/deleteSessionDialog";
 import RenameSessionDialog from "@/features/renameSessionDialog";
 import {
-  DropDownMenu,
-  DropDownMenuContent,
-  DropDownMenuItem,
-  DropDownMenuTrigger,
-} from "@/ui/dropDown";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/ui/dropdown";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/tooltip";
 import Button from "@ui/button";
 import { Ellipsis } from "lucide-react";
@@ -25,25 +25,25 @@ const SessionActionsDropdown: FC<SessionActionsDropdownProps> = ({
 
   return (
     <>
-      <DropDownMenu>
+      <DropdownMenu>
         <Tooltip>
           <TooltipTrigger>
-            <DropDownMenuTrigger>
+            <DropdownMenuTrigger>
               <Button variant="tertiary" size="icon_xs">
                 <Ellipsis size={20} />
               </Button>
-            </DropDownMenuTrigger>
+            </DropdownMenuTrigger>
           </TooltipTrigger>
           <TooltipContent>Chat actions</TooltipContent>
         </Tooltip>
-        <DropDownMenuContent>
-          <DropDownMenuItem onSelect={() => setRenameOpen((prev) => !prev)}>
+        <DropdownMenuContent>
+          <DropdownMenuItem onSelect={() => setRenameOpen((prev) => !prev)}>
             Rename
-          </DropDownMenuItem>
-          <DropDownMenuItem onSelect={() => setDeleteOpen((prev) => !prev)}>
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => setDeleteOpen((prev) => !prev)}>
             Delete
-          </DropDownMenuItem>
-        </DropDownMenuContent>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
         <RenameSessionDialog
           open={renameOpen}
           onOpenChange={setRenameOpen}
@@ -55,7 +55,7 @@ const SessionActionsDropdown: FC<SessionActionsDropdownProps> = ({
           open={deleteOpen}
           onOpenChange={setDeleteOpen}
         />
-      </DropDownMenu>
+      </DropdownMenu>
     </>
   );
 };
