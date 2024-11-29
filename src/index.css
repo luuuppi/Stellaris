@@ -23,6 +23,33 @@
   }
 }
 
+@layer components {
+  .markdown {
+    & > ul {
+      @apply mb-4 flex list-inside list-disc flex-col gap-1;
+    }
+
+    & > ol {
+      @apply mb-4 flex list-inside list-decimal flex-col gap-1;
+    }
+
+    & > h1 {
+      @apply my-2 text-2xl font-bold;
+    }
+
+    & > h2,
+    h3,
+    h4 {
+      @apply my-1 text-xl font-semibold;
+    }
+
+    & > h5,
+    h6 {
+      @apply text-lg;
+    }
+  }
+}
+
 #root {
   @apply h-screen bg-neutral-900 font-sans text-white antialiased;
 }

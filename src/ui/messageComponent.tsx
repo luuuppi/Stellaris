@@ -35,7 +35,7 @@ const MessageComponent: FC<MessageComponentProps> = memo(({ children, role }) =>
 const UserMarkdown = ({ children }: { children: string }) => {
   return (
     <Markdown
-      className="max-w-[70%] whitespace-pre-wrap break-words rounded-lg rounded-tr-sm bg-night-800 px-5 py-3 leading-[200%]"
+      className="markdown max-w-[70%] whitespace-pre-wrap break-words rounded-lg rounded-tr-sm bg-night-800 px-5 py-3 leading-[200%]"
       children={children as string}
       components={{
         code: ({ children }) => {
@@ -45,9 +45,6 @@ const UserMarkdown = ({ children }: { children: string }) => {
             </div>
           );
         },
-        ol: ({ children }) => (
-          <ol className="mb-4 flex list-inside list-decimal flex-col gap-2">{children}</ol>
-        ),
         p: "span",
       }}
     />
@@ -57,7 +54,7 @@ const UserMarkdown = ({ children }: { children: string }) => {
 const AssistantMarkdown = ({ children }: { children: string }) => {
   return (
     <Markdown
-      className="break-words rounded-lg rounded-tl-sm bg-night-800 px-5 py-3 leading-[200%]"
+      className="markdown break-words rounded-lg rounded-tl-sm bg-night-800 px-5 py-3 leading-[200%]"
       children={children as string}
       components={{
         code: ({ children, className, ...props }) => {
@@ -79,9 +76,6 @@ const AssistantMarkdown = ({ children }: { children: string }) => {
             );
           }
         },
-        ol: ({ children }) => (
-          <ol className="mb-4 flex list-inside list-decimal flex-col gap-2">{children}</ol>
-        ),
         p: "span",
       }}
     />
