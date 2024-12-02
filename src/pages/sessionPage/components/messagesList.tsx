@@ -1,11 +1,12 @@
 import { type Message } from "@/store/useSessionsStore";
+import Button from "@/ui/button";
 import MessageComponent from "@/ui/messageComponent";
+import Spinner from "@/ui/spinner";
+import { ArrowDown } from "lucide-react";
 import { type FC } from "react";
 import { useStickToBottom } from "use-stick-to-bottom";
 import { useSnapshot } from "valtio";
 import completionStore from "../model/store/completionStore";
-import { ArrowDown } from "lucide-react";
-import Button from "@/ui/button";
 
 type MessagesListProps = {
   messages: Message[];
@@ -17,6 +18,7 @@ const MessagesList: FC<MessagesListProps> = ({ messages }) => {
     resize: "smooth",
     initial: "smooth",
   });
+  const isCompletion = completionSnap.completion === "";
 
   return (
     <div className="relative flex flex-1 overflow-auto">
@@ -31,10 +33,15 @@ const MessagesList: FC<MessagesListProps> = ({ messages }) => {
             </MessageComponent>
           ))}
           {completionSnap.isCompletionInProgress && (
-            <MessageComponent role="assistant">
-              {completionSnap.completion === ""
-                ? "Loading model..."
-                : completionSnap.completion}
+            <MessageComponent role={isCompletion ? "nonMdAssistant" : "assistant"}>
+              {isCompletion ? (
+                <span className="flex items-center gap-2">
+                  <Spinner size={4} />
+                  Loading model...
+                </span>
+              ) : (
+                completionSnap.completion
+              )}
             </MessageComponent>
           )}
         </div>
