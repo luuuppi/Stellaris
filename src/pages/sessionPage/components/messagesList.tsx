@@ -7,6 +7,7 @@ import { type FC } from "react";
 import { useStickToBottom } from "use-stick-to-bottom";
 import { useSnapshot } from "valtio";
 import completionStore from "../model/store/completionStore";
+import useMotionText from "../utils/useMotionText";
 
 type MessagesListProps = {
   messages: Message[];
@@ -19,6 +20,7 @@ const MessagesList: FC<MessagesListProps> = ({ messages }) => {
     initial: "smooth",
   });
   const isCompletion = completionSnap.completion === "";
+  const animatedCompletion = useMotionText(completionSnap.completion);
 
   return (
     <div className="relative flex flex-1 overflow-auto">
@@ -40,14 +42,19 @@ const MessagesList: FC<MessagesListProps> = ({ messages }) => {
                   Loading model...
                 </span>
               ) : (
-                completionSnap.completion
+                animatedCompletion
               )}
             </MessageComponent>
           )}
         </div>
         {!isAtBottom && (
           <div className="absolute inset-x-0 bottom-5 flex justify-center">
-            <Button variant="secondary" size="icon_xs" onClick={() => scrollToBottom()}>
+            <Button
+              variant="secondary"
+              size="icon_xs"
+              className="shadow-md shadow-night-950"
+              onClick={() => scrollToBottom()}
+            >
               <ArrowDown size={20} />
             </Button>
           </div>
