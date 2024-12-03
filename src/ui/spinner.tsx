@@ -1,16 +1,17 @@
-import cn from "@/utils/cn";
 import { type FC } from "react";
 
 type SpinnerProps = {
   size?: number;
 };
 
-const Spinner: FC<SpinnerProps> = ({ size = 8 }) => {
+const Spinner: FC<SpinnerProps> = ({ size = 32 }) => {
   return (
     <div role="status">
       <svg
         aria-hidden="true"
-        className={cn("animate-spin fill-night-50 text-night-500", `w-${size} h-${size}`)}
+        className="animate-spin fill-night-50 text-night-500"
+        width={size}
+        height={size}
         viewBox="0 0 100 101"
         fill="none"
       >

@@ -38,7 +38,7 @@ const MessagesList: FC<MessagesListProps> = ({ messages }) => {
             <MessageComponent role={isCompletion ? "nonMdAssistant" : "assistant"}>
               {isCompletion ? (
                 <span className="flex items-center gap-2">
-                  <Spinner size={4} />
+                  <Spinner size={16} />
                   Loading model...
                 </span>
               ) : (
