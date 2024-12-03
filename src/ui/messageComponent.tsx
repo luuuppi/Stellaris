@@ -8,6 +8,7 @@ const messageStyles = cva("flex gap-5", {
   variants: {
     role: {
       assistant: "flex-row",
+      nonMdAssistant: "flex-row",
       user: "flex-row-reverse",
     },
   },
@@ -23,11 +24,13 @@ const MessageComponent: FC<MessageComponentProps> = memo(({ children, role }) =>
       <div className="flex h-12 min-w-12 items-center justify-center rounded-full bg-night-50 text-black">
         {role === "assistant" ? <Bot /> : <UserRound />}
       </div>
-      {role === "assistant" ? (
-        <AssistantMarkdown children={children as string} />
-      ) : (
-        <UserMarkdown children={children as string} />
+      {role === "nonMdAssistant" && (
+        <div className="rounded-lg rounded-tl-sm bg-night-800 px-5 py-3 leading-[200%]">
+          {children}
+        </div>
       )}
+      {role === "assistant" && <AssistantMarkdown children={children as string} />}
+      {role === "user" && <UserMarkdown children={children as string} />}
     </div>
   );
 });
@@ -35,7 +38,7 @@ const MessageComponent: FC<MessageComponentProps> = memo(({ children, role }) =>
 const UserMarkdown = ({ children }: { children: string }) => {
   return (
     <Markdown
-      className="max-w-[70%] whitespace-pre-wrap break-words rounded-lg rounded-tr-sm bg-night-800 px-5 py-3 leading-[200%]"
+      className="markdown max-w-[70%] whitespace-pre-wrap break-words rounded-lg rounded-tr-sm bg-night-800 px-5 py-3 leading-[200%]"
       children={children as string}
       components={{
         code: ({ children }) => {
@@ -45,9 +48,6 @@ const UserMarkdown = ({ children }: { children: string }) => {
             </div>
           );
         },
-        ol: ({ children }) => (
-          <ol className="mb-4 flex list-inside list-decimal flex-col gap-2">{children}</ol>
-        ),
         p: "span",
       }}
     />
@@ -57,7 +57,7 @@ const UserMarkdown = ({ children }: { children: string }) => {
 const AssistantMarkdown = ({ children }: { children: string }) => {
   return (
     <Markdown
-      className="break-words rounded-lg rounded-tl-sm bg-night-800 px-5 py-3 leading-[200%]"
+      className="markdown break-words rounded-lg rounded-tl-sm bg-night-800 px-5 py-3 leading-[200%]"
       children={children as string}
       components={{
         code: ({ children, className, ...props }) => {
@@ -79,9 +79,6 @@ const AssistantMarkdown = ({ children }: { children: string }) => {
             );
           }
         },
-        ol: ({ children }) => (
-          <ol className="mb-4 flex list-inside list-decimal flex-col gap-2">{children}</ol>
-        ),
         p: "span",
       }}
     />

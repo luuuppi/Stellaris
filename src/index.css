@@ -5,21 +5,53 @@
 @tailwind utilities;
 
 @layer utilities {
-  .better-scrollbar::-webkit-scrollbar {
-    @apply h-2 w-2;
-  }
-  .better-scrollbar::-webkit-scrollbar-track {
-    @apply rounded-b-full bg-night-600/20;
-  }
-  .better-scrollbar::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-night-600;
-  }
-  .better-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-night-500;
+  .better-scrollbar {
+    &::-webkit-scrollbar {
+      @apply h-2 w-2;
+    }
+
+    &::-webkit-scrollbar-track {
+      @apply rounded-b-full bg-night-600/20;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply rounded-full bg-night-600;
+
+      &:hover {
+        @apply bg-night-500;
+      }
+    }
   }
 
   .field-sizing-content {
     field-sizing: content;
+  }
+}
+
+@layer components {
+  .markdown {
+    & > ul {
+      @apply mb-4 flex list-inside list-disc flex-col gap-1;
+    }
+
+    & > ol {
+      @apply mb-4 flex list-inside list-decimal flex-col gap-1;
+    }
+
+    & > h1 {
+      @apply my-2 text-2xl font-bold;
+    }
+
+    & > h2,
+    h3,
+    h4 {
+      @apply my-1 text-xl font-semibold;
+    }
+
+    & > h5,
+    h6 {
+      @apply text-lg;
+    }
   }
 }
 

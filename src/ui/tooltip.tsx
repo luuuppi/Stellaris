@@ -77,7 +77,7 @@ const TooltipContent = forwardRef<
         <TooltipPrimitive.Portal forceMount>
           <TooltipPrimitive.Content ref={ref} asChild sideOffset={5} {...props}>
             <motion.div
-              className="origin-[var(--radix-tooltip-content-transform-origin)] rounded-lg bg-night-500 p-1 text-sm text-white"
+              className="origin-[var(--radix-tooltip-content-transform-origin)] rounded-xl border border-night-700 bg-night-900 p-2 text-sm text-white"
               variants={tooltipAnimation}
               initial="invisible"
               animate="visible"
