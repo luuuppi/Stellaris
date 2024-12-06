@@ -1,4 +1,5 @@
 import { useSettingsStore } from "@/store/useSettingsStore";
+import Label from "@/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/ui/select";
 import cn from "@/utils/cn";
 import { type ModelResponse } from "ollama/browser";
@@ -22,19 +23,22 @@ const ModelSelect: FC<ModelSelectProps> = ({ models, serverStatus, isValid, setI
 
   return (
     <Select value={currentModel} onValueChange={onValueChange}>
-      <SelectTrigger
-        className={cn(!isValid && "ring-2 ring-red-500")}
-        value={currentModel}
-        label="Available models"
-        disabled={serverStatus === "disconnected"}
-      />
-      <SelectContent>
-        {models.map((model) => (
-          <SelectItem key={model.name} value={model.name}>
-            {model.name}
-          </SelectItem>
-        ))}
-      </SelectContent>
+      <div>
+        <Label>Global model</Label>
+        <SelectTrigger
+          className={cn("mt-1", !isValid && "ring-2 ring-red-500")}
+          value={currentModel}
+          label="Available models"
+          disabled={serverStatus === "disconnected"}
+        />
+        <SelectContent>
+          {models.map((model) => (
+            <SelectItem key={model.name} value={model.name}>
+              {model.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </div>
     </Select>
   );
 };
