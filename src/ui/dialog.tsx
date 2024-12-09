@@ -73,7 +73,16 @@ const DialogContent = forwardRef<
           <DialogPrimitive.Overlay
             className="fixed inset-0 bg-night-900/40 backdrop-blur-sm"
             onClick={(e) => e.stopPropagation()}
+          />
+          <DialogPrimitive.Content
+            className={cn(
+              "fixed left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] flex-col rounded-xl border border-night-700 bg-night-900 p-6 text-white shadow-xl shadow-night-950",
+              className,
+            )}
+            onClick={(e) => e.stopPropagation()}
             asChild
+            ref={ref}
+            {...props}
           >
             <motion.div
               variants={contentAnimation}
@@ -81,26 +90,9 @@ const DialogContent = forwardRef<
               animate="opened"
               exit="closed"
             >
-              <DialogPrimitive.Content
-                className={cn(
-                  "fixed left-1/2 top-1/2 !translate-x-[-50%] !translate-y-[-50%] rounded-xl border border-night-700 bg-night-900 p-6 text-white shadow-xl shadow-night-950",
-                  className,
-                )}
-                asChild
-                ref={ref}
-                {...props}
-              >
-                <motion.div
-                  variants={contentAnimation}
-                  initial="closed"
-                  animate="opened"
-                  exit="closed"
-                >
-                  {children}
-                </motion.div>
-              </DialogPrimitive.Content>
+              {children}
             </motion.div>
-          </DialogPrimitive.Overlay>
+          </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
       )}
     </AnimatePresence>
