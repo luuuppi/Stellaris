@@ -6,9 +6,12 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/ui/dialog";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { type FC } from "react";
+
+const queryClient = new QueryClient();
 
 const SettingsLayout: FC = () => {
   const navigate = useNavigate();
@@ -53,9 +56,9 @@ const SettingsLayout: FC = () => {
             </Link>
           </nav>
           <div className="mx-5 h-full w-[1px] bg-night-600" />
-          <main className="mx-auto flex h-full w-full flex-col">
+          <QueryClientProvider client={queryClient}>
             <Outlet />
-          </main>
+          </QueryClientProvider>
         </div>
       </DialogContent>
     </Dialog>
