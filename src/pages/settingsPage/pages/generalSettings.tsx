@@ -40,7 +40,7 @@ const GeneralSettingsPage: FC = () => {
   }, [serverStatus, getModels]);
 
   return (
-    <>
+    <main className="flex w-full flex-col">
       <div className="flex flex-col gap-3">
         <ServerInput serverStatus={serverStatus} checkConnection={getModels} />
         <ModelSelect
@@ -65,7 +65,7 @@ const GeneralSettingsPage: FC = () => {
           </Button>
         </div>
       </div>
-    </>
+    </main>
   );
 };
 
