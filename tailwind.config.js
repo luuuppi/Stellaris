@@ -36,10 +36,14 @@ export default {
           "0%, 10%": { transform: "rotate(0deg)" },
           "90%, 100%": { transform: "rotate(-360deg)" },
         },
+        spin: {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(-360deg)" },
+        },
       },
       animation: {
         "infinite-spin": "delayedSpin 1.3s cubic-bezier(0.76, 0, 0.24, 1) infinite",
-        spin: "delayedSpin 1.3s cubic-bezier(0.76, 0, 0.24, 1)",
+        spin: "spin 1.3s cubic-bezier(0.76, 0, 0.24, 1)",
       },
     },
     fontFamily: {
