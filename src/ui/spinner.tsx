@@ -9,7 +9,7 @@ const Spinner: FC<SpinnerProps> = ({ size = 32 }) => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className="animate-spin fill-night-50 text-night-500"
+        className="animate-infinite-spin fill-night-50 text-night-500"
         width={size}
         height={size}
         viewBox="0 0 100 101"
