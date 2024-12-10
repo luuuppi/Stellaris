@@ -4,21 +4,28 @@ import Label from "@/ui/label";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/tooltip";
 import cn from "@/utils/cn";
 import { RefreshCcw } from "lucide-react";
-import { useCallback, useRef, type ChangeEvent, type FC } from "react";
+import { useCallback, useRef, useState, type ChangeEvent, type FC } from "react";
 
 type ServerInputProps = {
   serverStatus: "connected" | "disconnected";
   checkConnection: () => void;
+  isChecking: boolean;
 };
 
-const ServerInput: FC<ServerInputProps> = ({ serverStatus, checkConnection }) => {
+const ServerInput: FC<ServerInputProps> = ({ serverStatus, checkConnection, isChecking }) => {
   const ollamaServer = useSettingsStore((state) => state.ollamaServer);
   const setOllamaServer = useSettingsStore((state) => state.setOllamaServer);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [animateOnce, setAnimateOnce] = useState<boolean>(false);
 
   const changeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setOllamaServer(e.target.value);
   }, []);
+
+  const handleRefresh = useCallback(() => {
+    checkConnection();
+    setAnimateOnce(true);
+  }, [checkConnection]);
 
   return (
     <div className="flex w-full flex-col justify-center">
@@ -45,8 +52,13 @@ const ServerInput: FC<ServerInputProps> = ({ serverStatus, checkConnection }) =>
         </div>
         <Tooltip>
           <TooltipTrigger>
-            <Button variant="tertiary" size="icon_sm" onClick={checkConnection}>
-              <RefreshCcw />
+            <Button variant="tertiary" size="icon_sm" onClick={handleRefresh}>
+              <RefreshCcw
+                data-anim-infinite={isChecking}
+                data-anim-once={animateOnce}
+                className="data-[anim-infinite=true]:animate-infinite-spin data-[anim-once=true]:animate-spin"
+                onAnimationEnd={() => setAnimateOnce(false)}
+              />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Check connection</TooltipContent>

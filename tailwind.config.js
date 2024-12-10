@@ -31,6 +31,16 @@ export default {
           50: "#F1F4FD",
         },
       },
+      keyframes: {
+        delayedSpin: {
+          "0%, 10%": { transform: "rotate(0deg)" },
+          "90%, 100%": { transform: "rotate(-360deg)" },
+        },
+      },
+      animation: {
+        "infinite-spin": "delayedSpin 1.3s cubic-bezier(0.76, 0, 0.24, 1) infinite",
+        spin: "delayedSpin 1.3s cubic-bezier(0.76, 0, 0.24, 1)",
+      },
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
