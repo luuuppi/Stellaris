@@ -76,7 +76,7 @@ const DialogContent = forwardRef<
           />
           <DialogPrimitive.Content
             className={cn(
-              "fixed left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] flex-col rounded-xl border border-night-700 bg-night-900 p-6 text-white shadow-xl shadow-night-950",
+              "fixed left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] flex-col rounded-xl border border-night-700 bg-night-900 p-6 text-white shadow-xl shadow-night-950 focus:outline-none",
               className,
             )}
             onClick={(e) => e.stopPropagation()}
