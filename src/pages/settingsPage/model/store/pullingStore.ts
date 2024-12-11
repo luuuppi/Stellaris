@@ -4,6 +4,7 @@ import { proxy } from "valtio";
 type PullingState = {
   data: ProgressResponse & ErrorResponse;
   isPullingInProgress: boolean;
+  modelName: string;
 };
 
 const pullingStore = proxy<PullingState>({
@@ -15,6 +16,7 @@ const pullingStore = proxy<PullingState>({
     error: "",
   },
   isPullingInProgress: false,
+  modelName: "",
 });
 
 export default pullingStore;
