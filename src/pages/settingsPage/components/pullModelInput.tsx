@@ -1,5 +1,7 @@
 import Button from "@/ui/button";
 import Input from "@/ui/input";
+import Label from "@/ui/label";
+import { motion } from "framer-motion";
 import { Download, Square } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useState, type FC } from "react";
 import { useSnapshot } from "valtio";
@@ -20,23 +22,20 @@ type PullModelInputProps = {
 const PullModelInput: FC<PullModelInputProps> = ({ serverStatus, refetchModels }) => {
   const disabled = serverStatus === "disconnected";
   const [value, setValue] = useState<string>("");
-  const [progress, setProgress] = useState<string>("");
+  const [progress, setProgress] = useState<string>("0");
   const { pullModel, abortPulling } = usePullOllamaModel(
     (value) => (pullingStore.data = value),
   );
   const pullingState = useSnapshot(pullingStore);
 
   useEffect(() => {
+    if (!pullingState.isPullingInProgress) setProgress("0");
     if (!pullingState.data.completed) return;
 
     setProgress(
       calculatePercentage(pullingState.data.total, pullingState.data.completed).toFixed(),
     );
-  }, [pullingState.data.completed]);
-
-  useEffect(() => {
-    if (!pullingState.isPullingInProgress && !pullingState.data.error) setValue("");
-  }, [pullingState.isPullingInProgress, pullingState.data.error]);
+  }, [pullingState.data.completed, pullingState.isPullingInProgress]);
 
   useEffect(() => {
     if (pullingStore.data.status === "success") refetchModels();
@@ -47,20 +46,36 @@ const PullModelInput: FC<PullModelInputProps> = ({ serverStatus, refetchModels }
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     pullModel(value);
+    setValue("");
   };
 
   return (
     <div className="flex flex-col">
-      <form className="flex gap-2" onSubmit={handleSubmit}>
-        <Input
-          className="w-full"
-          name="Pull model input"
-          placeholder="Model name (e.g. phi3.5)"
-          autoComplete="off"
-          disabled={disabled}
-          value={value}
-          onChange={handleChange}
-        />
+      <Label>Download model</Label>
+      <form className="my-1 flex gap-2" onSubmit={handleSubmit}>
+        {!pullingState.isPullingInProgress && (
+          <Input
+            className="w-full"
+            name="Pull model input"
+            placeholder="Model name (e.g. phi3.5)"
+            autoComplete="off"
+            disabled={disabled}
+            value={value}
+            onChange={handleChange}
+          />
+        )}
+        {pullingState.isPullingInProgress && (
+          <motion.div
+            className="flex w-full items-center justify-between rounded-xl border border-night-600 bg-night-800 px-4 py-2"
+            animate={{
+              background: `linear-gradient(90deg, rgb(22 163 74) ${progress}%, transparent 0%)`,
+            }}
+            transition={{ type: "spring", bounce: 0, duration: 0.5 }}
+          >
+            <span className="z-10">Downloading {pullingStore.modelName}...</span>
+            <span className="z-10">{progress}%</span>
+          </motion.div>
+        )}
         {!pullingState.isPullingInProgress && (
           <Button variant="secondary" size="icon_sm" type="submit" disabled={disabled}>
             <Download />
@@ -72,13 +87,8 @@ const PullModelInput: FC<PullModelInputProps> = ({ serverStatus, refetchModels }
           </Button>
         )}
       </form>
-      <div className="flex gap-1">
-        {pullingState.isPullingInProgress && (
-          <span>
-            {pullingState.data.status}
-            {pullingState.data.total && <span> {progress}%</span>}
-          </span>
-        )}
+      <div className="flex h-[24px] gap-1">
+        {pullingState.isPullingInProgress && <span>{pullingState.data.status}</span>}
         <span className="text-red-500">{pullingState.data.error}</span>
       </div>
     </div>
