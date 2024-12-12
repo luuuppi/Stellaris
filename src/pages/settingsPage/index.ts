@@ -1,3 +1,5 @@
-import SettingsPage from "./settingsPage";
+import SettingsLayout from "./settingsLayout";
+import GeneralSettingsPage from "./pages/generalSettings";
+import ModelsSettingsPage from "./pages/modelsSettings";
 
-export default SettingsPage;
+export { SettingsLayout, GeneralSettingsPage, ModelsSettingsPage };
