@@ -4,7 +4,7 @@ import RootLayout from "./pages/rootLayout";
 import SessionPage from "./pages/sessionPage/sessionPage";
 import SessionsLayout from "./pages/sessionsLayout";
 import SessionsPage from "./pages/sessionsPage";
-import SettingsPage from "./pages/settingsPage/settingsPage";
+import { GeneralSettingsPage, ModelsSettingsPage, SettingsLayout } from "./pages/settingsPage";
 
 const rootRoute = createRootRoute({
   component: RootLayout,
@@ -15,7 +15,7 @@ const indexRoute = createRoute({
   path: "/",
   component: IndexPage,
   beforeLoad: () => {
-    throw redirect({ to: "/sessions/settings" });
+    throw redirect({ to: "/sessions/settings/general" });
   },
 });
 
@@ -37,15 +37,32 @@ const sessionRoute = createRoute({
   component: SessionPage,
 });
 
-const settingsRoute = createRoute({
+const settingsLayout = createRoute({
   getParentRoute: () => sessionsRoute,
-  path: "settings",
-  component: SettingsPage,
+  id: "_settings-layout",
+  component: SettingsLayout,
+});
+
+const generalSettingsRoute = createRoute({
+  getParentRoute: () => settingsLayout,
+  path: "settings/general",
+  component: GeneralSettingsPage,
+});
+
+const modelsSettingsRoute = createRoute({
+  getParentRoute: () => settingsLayout,
+  path: "settings/models",
+  component: ModelsSettingsPage,
 });
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
-  sessionsLayout.addChildren([sessionsRoute.addChildren([settingsRoute]), sessionRoute]),
+  sessionsLayout.addChildren([
+    sessionsRoute.addChildren([
+      settingsLayout.addChildren([generalSettingsRoute, modelsSettingsRoute]),
+    ]),
+    sessionRoute,
+  ]),
 ]);
 
 export default routeTree;
