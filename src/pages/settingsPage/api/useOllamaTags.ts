@@ -8,7 +8,6 @@ const useOllamaTags = () => {
 
   const getOllamaTags = async () => {
     try {
-      console.log("fetch ollama tags");
       const response = await fetch(`${ollamaServer}/api/tags`);
       setServerStatus("connected");
       return response.json();
