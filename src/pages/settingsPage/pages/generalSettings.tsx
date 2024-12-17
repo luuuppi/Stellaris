@@ -1,16 +1,17 @@
+import ModelSelect from "@/features/modelSelect";
 import { useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import Button from "@/ui/button";
-import { useState, type FC } from "react";
+import { type FC } from "react";
 import useOllamaTags from "../api/useOllamaTags";
-import ModelSelect from "../components/modelSelect";
 import ServerInput from "../components/serverInput";
 
 const GeneralSettingsPage: FC = () => {
   const clearSessions = useSessionStore((state) => state.clearSessions);
   const resetSettings = useSettingsStore((state) => state.resetSettings);
   const serverStatus = useSettingsStore((state) => state.serverStatus);
-  const [isSelectValid, setIsSelectValid] = useState<boolean>(true);
+  const currentModel = useSettingsStore((state) => state.model);
+  const setModel = useSettingsStore((state) => state.setModel);
   const { data, refetch, isFetching } = useOllamaTags();
 
   return (
@@ -22,10 +23,11 @@ const GeneralSettingsPage: FC = () => {
           isChecking={isFetching}
         />
         <ModelSelect
+          label="Global model"
           models={data?.models ?? []}
           serverStatus={serverStatus}
-          isValid={isSelectValid}
-          setIsValid={setIsSelectValid}
+          currentModel={currentModel}
+          onValueChange={setModel}
         />
       </div>
       <div className="mt-auto">
