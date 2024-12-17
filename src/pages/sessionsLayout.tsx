@@ -38,7 +38,7 @@ const SessionsLayout: FC = () => {
             />
           ))}
         </nav>
-        <Link to="/sessions/settings">
+        <Link to="/sessions/settings/general">
           <Button className="w-full" variant="tertiary" leadingIcon={<SettingsIcon />}>
             Settings
           </Button>

@@ -2,9 +2,10 @@ import { createRootRoute, createRoute, redirect } from "@tanstack/react-router";
 import IndexPage from "./pages/indexPage";
 import RootLayout from "./pages/rootLayout";
 import SessionPage from "./pages/sessionPage/sessionPage";
+import SessionSettingsPage from "./pages/sessionSettingsPage";
 import SessionsLayout from "./pages/sessionsLayout";
 import SessionsPage from "./pages/sessionsPage";
-import SettingsPage from "./pages/settingsPage/settingsPage";
+import { GeneralSettingsPage, ModelsSettingsPage, SettingsLayout } from "./pages/settingsPage";
 
 const rootRoute = createRootRoute({
   component: RootLayout,
@@ -15,7 +16,7 @@ const indexRoute = createRoute({
   path: "/",
   component: IndexPage,
   beforeLoad: () => {
-    throw redirect({ to: "/sessions/settings" });
+    throw redirect({ to: "/sessions/settings/general" });
   },
 });
 
@@ -37,15 +38,38 @@ const sessionRoute = createRoute({
   component: SessionPage,
 });
 
-const settingsRoute = createRoute({
-  getParentRoute: () => sessionsRoute,
+const sessionSettingsRoute = createRoute({
+  getParentRoute: () => sessionRoute,
   path: "settings",
-  component: SettingsPage,
+  component: SessionSettingsPage,
+});
+
+const settingsLayout = createRoute({
+  getParentRoute: () => sessionsRoute,
+  id: "_settings-layout",
+  component: SettingsLayout,
+});
+
+const generalSettingsRoute = createRoute({
+  getParentRoute: () => settingsLayout,
+  path: "settings/general",
+  component: GeneralSettingsPage,
+});
+
+const modelsSettingsRoute = createRoute({
+  getParentRoute: () => settingsLayout,
+  path: "settings/models",
+  component: ModelsSettingsPage,
 });
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
-  sessionsLayout.addChildren([sessionsRoute.addChildren([settingsRoute]), sessionRoute]),
+  sessionsLayout.addChildren([
+    sessionsRoute.addChildren([
+      settingsLayout.addChildren([generalSettingsRoute, modelsSettingsRoute]),
+    ]),
+    sessionRoute.addChildren([sessionSettingsRoute]),
+  ]),
 ]);
 
 export default routeTree;

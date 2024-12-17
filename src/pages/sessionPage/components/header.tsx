@@ -1,6 +1,7 @@
 import DeleteSessionDialog from "@/features/deleteSessionDialog";
 import Button from "@/ui/button";
-import { Trash2 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { SettingsIcon, Trash2 } from "lucide-react";
 import { type FC, useState } from "react";
 
 type HeaderProps = {
@@ -19,15 +20,26 @@ const Header: FC<HeaderProps> = ({ name, model, id }) => {
         <div className="h-5 w-[1px] bg-night-500" />
         <span className="text-night-500">{model}</span>
       </div>
-      <Button variant="tertiary" size="icon_xs" onClick={() => setDeleteOpen((prev) => !prev)}>
-        <Trash2 size={20} />
-      </Button>
-      <DeleteSessionDialog
-        open={deleteOpen}
-        onOpenChange={setDeleteOpen}
-        sessionId={id}
-        sessionName={name}
-      />
+      <div className="flex items-center gap-1">
+        <Link to="/sessions/$sessionId/settings" params={{ sessionId: id }}>
+          <Button variant="tertiary" size="icon_xs">
+            <SettingsIcon size={20} />
+          </Button>
+        </Link>
+        <Button
+          variant="tertiary"
+          size="icon_xs"
+          onClick={() => setDeleteOpen((prev) => !prev)}
+        >
+          <Trash2 size={20} />
+        </Button>
+        <DeleteSessionDialog
+          open={deleteOpen}
+          onOpenChange={setDeleteOpen}
+          sessionId={id}
+          sessionName={name}
+        />
+      </div>
     </header>
   );
 };

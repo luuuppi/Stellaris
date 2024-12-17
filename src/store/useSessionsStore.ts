@@ -13,6 +13,7 @@ type Session = {
   name: string;
   messages: Message[];
   model: string;
+  systemMessage: string;
 };
 
 type SessionsState = {
@@ -25,6 +26,9 @@ type SessionsState = {
   clearSessions: () => void;
   getSessionMessages: (id: string) => Message[] | undefined;
   getModel: (id: string) => string;
+  getSystemMessage: (id: string) => string;
+  setSystemMessage: (id: string, value: string) => void;
+  setSessionModel: (id: string, value: string) => void;
 };
 
 export const useSessionStore = create<SessionsState>()(
@@ -36,7 +40,7 @@ export const useSessionStore = create<SessionsState>()(
 
         set(
           produce((state: SessionsState) => {
-            state.sessions.push({ id, name: "", messages: [], model });
+            state.sessions.push({ id, name: "", messages: [], model, systemMessage: "" });
           }),
         );
 
@@ -82,6 +86,31 @@ export const useSessionStore = create<SessionsState>()(
       },
       getModel: (id) => {
         return get().sessions.find((session) => session.id === id)?.model ?? "";
+      },
+      getSystemMessage: (id) => {
+        return get().sessions.find((session) => session.id === id)?.systemMessage ?? "";
+      },
+      setSystemMessage: (id, value) => {
+        return set(
+          produce((state: SessionsState) => {
+            const neededSession = state.sessions.find((session) => session.id === id);
+
+            if (neededSession?.systemMessage === undefined) throw new Error("Wrong id");
+
+            neededSession.systemMessage = value;
+          }),
+        );
+      },
+      setSessionModel: (id, value) => {
+        return set(
+          produce((state: SessionsState) => {
+            const neededSession = state.sessions.find((session) => session.id === id);
+
+            if (neededSession?.model === undefined) throw new Error("Wrong id");
+
+            neededSession.model = value;
+          }),
+        );
       },
     }),
     { name: "sessions" },

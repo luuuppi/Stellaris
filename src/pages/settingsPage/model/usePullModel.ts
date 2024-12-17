@@ -15,6 +15,7 @@ const usePullOllamaModel = (onChunk: (value: ProgressResponse & ErrorResponse) =
       abortControllerRef.current = abortController;
 
       const normalizedModelName = model.replace(/\s+/g, "").toLowerCase();
+      pullingStore.modelName = normalizedModelName;
 
       try {
         await pullOllamaModel(server, normalizedModelName, onChunk, abortController.signal);

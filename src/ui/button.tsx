@@ -7,7 +7,7 @@ import {
 } from "react";
 
 const buttonStyles = cva(
-  "transition-colors duration-150 ease-in-out font-medium flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50",
+  "transition-colors duration-150 ease-in-out font-medium flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none",
   {
     variants: {
       variant: {

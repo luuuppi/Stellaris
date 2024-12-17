@@ -53,6 +53,13 @@
       @apply text-lg;
     }
   }
+
+  .dashed-line {
+    background-image: linear-gradient(to right, rgb(239 68 68) 50%, rgba(255, 255, 255, 0) 0%);
+    background-position: center;
+    background-size: 20px 2px;
+    background-repeat: repeat-x;
+  }
 }
 
 #root {
