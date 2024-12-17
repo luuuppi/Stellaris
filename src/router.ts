@@ -2,6 +2,7 @@ import { createRootRoute, createRoute, redirect } from "@tanstack/react-router";
 import IndexPage from "./pages/indexPage";
 import RootLayout from "./pages/rootLayout";
 import SessionPage from "./pages/sessionPage/sessionPage";
+import SessionSettingsPage from "./pages/sessionSettingsPage";
 import SessionsLayout from "./pages/sessionsLayout";
 import SessionsPage from "./pages/sessionsPage";
 import { GeneralSettingsPage, ModelsSettingsPage, SettingsLayout } from "./pages/settingsPage";
@@ -37,6 +38,12 @@ const sessionRoute = createRoute({
   component: SessionPage,
 });
 
+const sessionSettingsRoute = createRoute({
+  getParentRoute: () => sessionRoute,
+  path: "settings",
+  component: SessionSettingsPage,
+});
+
 const settingsLayout = createRoute({
   getParentRoute: () => sessionsRoute,
   id: "_settings-layout",
@@ -61,7 +68,7 @@ const routeTree = rootRoute.addChildren([
     sessionsRoute.addChildren([
       settingsLayout.addChildren([generalSettingsRoute, modelsSettingsRoute]),
     ]),
-    sessionRoute,
+    sessionRoute.addChildren([sessionSettingsRoute]),
   ]),
 ]);
 

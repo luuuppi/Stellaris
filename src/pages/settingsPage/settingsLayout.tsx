@@ -11,7 +11,7 @@ import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { type FC } from "react";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const SettingsLayout: FC = () => {
   const navigate = useNavigate();

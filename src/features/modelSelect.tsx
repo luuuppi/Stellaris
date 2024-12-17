@@ -1,32 +1,29 @@
-import { useSettingsStore } from "@/store/useSettingsStore";
 import Label from "@/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/ui/select";
-import cn from "@/utils/cn";
 import { type ModelResponse } from "ollama/browser";
 import { type FC } from "react";
 
 type ModelSelectProps = {
   models: ModelResponse[];
   serverStatus: "connected" | "disconnected";
-  isValid: boolean;
-  setIsValid: (value: boolean) => void;
+  onValueChange: (value: string) => void;
+  currentModel: string;
+  label: string;
 };
 
-const ModelSelect: FC<ModelSelectProps> = ({ models, serverStatus, isValid, setIsValid }) => {
-  const currentModel = useSettingsStore((state) => state.model);
-  const setModel = useSettingsStore((state) => state.setModel);
-
-  const onValueChange = (value: string) => {
-    setIsValid(true);
-    setModel(value);
-  };
-
+const ModelSelect: FC<ModelSelectProps> = ({
+  models,
+  serverStatus,
+  onValueChange,
+  currentModel,
+  label,
+}) => {
   return (
     <Select value={currentModel} onValueChange={onValueChange}>
       <div>
-        <Label>Global model</Label>
+        <Label>{label}</Label>
         <SelectTrigger
-          className={cn("mt-1", !isValid && "ring-2 ring-red-500")}
+          className="mt-1"
           value={currentModel}
           label="Available models"
           disabled={serverStatus === "disconnected"}
