@@ -8,7 +8,7 @@ const Textarea = forwardRef<ElementRef<"textarea">, ComponentPropsWithoutRef<"te
         className={cn("w-full rounded-xl border border-night-600 bg-night-800 p-1", className)}
       >
         <textarea
-          className="better-scrollbar min-h-[5rem] w-full bg-night-800 p-2 focus:outline-none"
+          className="better-scrollbar max-h-[20rem] min-h-[5rem] w-full bg-night-800 p-2 focus:outline-none"
           {...props}
           ref={ref}
         />
