@@ -1,7 +1,7 @@
 import { type Message } from "@/store/useSessionsStore";
-import Button from "@/ui/button";
-import MessageComponent from "@/ui/messageComponent";
-import Spinner from "@/ui/spinner";
+import Button from "@ui/button";
+import MessageComponent from "@ui/messageComponent";
+import Spinner from "@ui/spinner";
 import { ArrowDown } from "lucide-react";
 import { type FC } from "react";
 import { useStickToBottom } from "use-stick-to-bottom";

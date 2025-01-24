@@ -1,6 +1,6 @@
 import { useSessionStore } from "@/store/useSessionsStore";
-import Button from "@/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/tooltip";
+import Button from "@ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
 import cn from "@/utils/cn";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion, Variants } from "framer-motion";

@@ -1,6 +1,6 @@
 import { useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
-import Button from "@/ui/button";
+import Button from "@ui/button";
 import SessionItem from "@/widgets/sessionItem";
 import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { Plus, SettingsIcon } from "lucide-react";
