@@ -1,3 +1,6 @@
+import { queryClient } from "@api/config/queryClient";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import Button from "@ui/button";
 import {
   Dialog,
@@ -6,12 +9,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@ui/dialog";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { type FC } from "react";
-
-export const queryClient = new QueryClient();
 
 const SettingsLayout: FC = () => {
   const navigate = useNavigate();

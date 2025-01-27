@@ -3,7 +3,7 @@ import { useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import Button from "@ui/button";
 import { type FC } from "react";
-import useOllamaTags from "../api/useOllamaTags";
+import useOllamaTags from "@api/useOllamaTags";
 import ServerInput from "../components/serverInput";
 
 const GeneralSettingsPage: FC = () => {

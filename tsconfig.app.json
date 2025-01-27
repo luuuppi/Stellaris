@@ -25,6 +25,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@ui/*": ["src/shared/ui/*"],
+      "@api/*": ["src/shared/api/*"]
     }
   },
   "include": ["src"]

@@ -1,6 +1,6 @@
 import { useSettingsStore } from "@/store/useSettingsStore";
 import { type FC } from "react";
-import useOllamaTags from "../api/useOllamaTags";
+import useOllamaTags from "@api/useOllamaTags";
 import { ModelItem, ModelsList } from "../components/modelsList";
 import PullModelInput from "../components/pullModelInput";
 

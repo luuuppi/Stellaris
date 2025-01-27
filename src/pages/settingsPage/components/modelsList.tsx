@@ -6,7 +6,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { MessageSquareShare, Trash2 } from "lucide-react";
 import { ElementRef, forwardRef, type FC, type ReactNode } from "react";
-import useDeleteOllamaModel from "../api/useDeleteOllamaModel";
+import useDeleteOllamaModel from "@api/useDeleteOllamaModel";
 
 type ModelsListProps = {
   children: ReactNode;
