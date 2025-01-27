@@ -1,6 +1,6 @@
 import { useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
-import ollamaChatRequest from "../api/ollamaChatRequest";
+import ollamaChatRequest from "@api/ollamaChatRequest";
 import completionStore from "../model/store/completionStore";
 import { useRef } from "react";
 

@@ -1,12 +1,12 @@
 import { useSessionStore } from "@/store/useSessionsStore";
-import Button from "@/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/tooltip";
+import Button from "@ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
 import cn from "@/utils/cn";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { MessageSquareShare, Trash2 } from "lucide-react";
 import { ElementRef, forwardRef, type FC, type ReactNode } from "react";
-import useDeleteOllamaModel from "../api/useDeleteOllamaModel";
+import useDeleteOllamaModel from "@api/useDeleteOllamaModel";
 
 type ModelsListProps = {
   children: ReactNode;

@@ -5,8 +5,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/ui/dropdown";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/tooltip";
+} from "@ui/dropdown";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
 import Button from "@ui/button";
 import { Ellipsis } from "lucide-react";
 import { type FC, useState } from "react";

@@ -1,7 +1,7 @@
 import { useSettingsStore } from "@/store/useSettingsStore";
-import Button from "@/ui/button";
-import Label from "@/ui/label";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/tooltip";
+import Button from "@ui/button";
+import Label from "@ui/label";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
 import cn from "@/utils/cn";
 import { RefreshCcw } from "lucide-react";
 import { useCallback, useRef, useState, type ChangeEvent, type FC } from "react";

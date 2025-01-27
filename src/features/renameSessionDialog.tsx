@@ -1,13 +1,13 @@
 import { useSessionStore } from "@/store/useSessionsStore";
-import Button from "@/ui/button";
+import Button from "@ui/button";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/ui/dialog";
-import Input from "@/ui/input";
+} from "@ui/dialog";
+import Input from "@ui/input";
 import { X } from "lucide-react";
 import {
   type ChangeEvent,

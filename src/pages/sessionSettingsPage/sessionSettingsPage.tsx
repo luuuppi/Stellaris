@@ -1,11 +1,11 @@
-import Button from "@/ui/button";
+import Button from "@ui/button";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/ui/dialog";
+} from "@ui/dialog";
 import { useRouter, useParams } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { type FC } from "react";

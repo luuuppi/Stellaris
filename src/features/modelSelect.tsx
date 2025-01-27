@@ -1,5 +1,5 @@
-import Label from "@/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "@/ui/select";
+import Label from "@ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@ui/select";
 import { type ModelResponse } from "ollama/browser";
 import { type FC } from "react";
 

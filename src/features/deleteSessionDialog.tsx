@@ -6,8 +6,8 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle,
-} from "@/ui/alertDialog";
-import Button from "@/ui/button";
+} from "@ui/alertDialog";
+import Button from "@ui/button";
 import { useNavigate } from "@tanstack/react-router";
 import { type ComponentPropsWithoutRef, type FC } from "react";
 

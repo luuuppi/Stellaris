@@ -1,5 +1,5 @@
 import ModelSelect from "@/features/modelSelect";
-import { useOllamaTags } from "@/pages/settingsPage";
+import useOllamaTags from "@api/useOllamaTags";
 import { useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import { type FC } from "react";
