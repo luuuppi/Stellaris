@@ -1,6 +1,6 @@
 import { queryClient } from "@api/config/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { Link, Outlet, useLocation, useRouter } from "@tanstack/react-router";
+import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import Button from "@ui/button";
 import {
   Dialog,
@@ -13,14 +13,14 @@ import { X } from "lucide-react";
 import { type FC } from "react";
 
 const SettingsLayout: FC = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
   const currentPage = useLocation({
     select: (location) => location.pathname.split("/").pop(),
   });
 
   const onOpenChange = (open: boolean) => {
     if (!open) {
-      router.history.back();
+      navigate({ to: "/sessions" });
     }
   };
 
