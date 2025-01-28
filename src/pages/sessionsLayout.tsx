@@ -21,7 +21,7 @@ const SessionsLayout: FC = () => {
   return (
     <div className="flex h-full flex-row">
       <aside className="flex w-full max-w-[17rem] flex-col bg-night-950 p-4 lg:max-w-[24rem]">
-        <h1 className="block text-center font-mono text-2xl font-bold">OllamaHub</h1>
+        <h1 className="block text-center font-mono text-2xl font-bold">Stellaris</h1>
         <Button className="my-6 w-full" onClick={handleCreateSesstion}>
           <Plus />
           Start new chat
