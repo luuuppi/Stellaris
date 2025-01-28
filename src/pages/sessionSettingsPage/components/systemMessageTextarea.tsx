@@ -1,5 +1,5 @@
 import { useSessionStore } from "@/store/useSessionsStore";
-import Textarea from "@/ui/textarea";
+import Textarea from "@ui/textarea";
 import Label from "@ui/label";
 import { ChangeEvent, type FC } from "react";
 

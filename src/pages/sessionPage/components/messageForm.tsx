@@ -1,5 +1,5 @@
 import { useSessionStore } from "@/store/useSessionsStore";
-import Button from "@/ui/button";
+import Button from "@ui/button";
 import { SendHorizontal, Square } from "lucide-react";
 import {
   type ChangeEvent,

@@ -1,5 +1,5 @@
 import DeleteSessionDialog from "@/features/deleteSessionDialog";
-import Button from "@/ui/button";
+import Button from "@ui/button";
 import { Link } from "@tanstack/react-router";
 import { SettingsIcon, Trash2 } from "lucide-react";
 import { type FC, useState } from "react";

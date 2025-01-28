@@ -1,4 +1,4 @@
-# OllamaHub - web UI for Ollama
+# Project Stellaris - web UI for Ollama
 
 ### ⭐ Main features
 

@@ -1,27 +1,26 @@
-import Button from "@/ui/button";
+import { queryClient } from "@api/config/queryClient";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Link, Outlet, useLocation, useRouter } from "@tanstack/react-router";
+import Button from "@ui/button";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/ui/dialog";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
+} from "@ui/dialog";
 import { X } from "lucide-react";
 import { type FC } from "react";
 
-export const queryClient = new QueryClient();
-
 const SettingsLayout: FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const currentPage = useLocation({
     select: (location) => location.pathname.split("/").pop(),
   });
 
   const onOpenChange = (open: boolean) => {
     if (!open) {
-      navigate({ to: "/sessions" });
+      router.history.back();
     }
   };
 

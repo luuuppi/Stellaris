@@ -5,7 +5,7 @@ import MessagesList from "./components/messagesList";
 import Header from "./components/header";
 import MessageForm from "./components/messageForm";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "../settingsPage";
+import { queryClient } from "@api/config/queryClient";
 
 const SessionPage: FC = () => {
   const { sessionId } = useParams({ from: "/_sessions-layout/sessions/$sessionId" });

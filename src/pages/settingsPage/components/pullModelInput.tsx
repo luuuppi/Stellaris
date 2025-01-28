@@ -1,6 +1,6 @@
-import Button from "@/ui/button";
-import Input from "@/ui/input";
-import Label from "@/ui/label";
+import Button from "@ui/button";
+import Input from "@ui/input";
+import Label from "@ui/label";
 import { motion } from "framer-motion";
 import { Download, Square } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useState, type FC } from "react";

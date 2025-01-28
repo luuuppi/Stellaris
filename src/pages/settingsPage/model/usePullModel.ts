@@ -1,7 +1,7 @@
 import { useSettingsStore } from "@/store/useSettingsStore";
 import type { ErrorResponse, ProgressResponse } from "ollama/browser";
 import { useCallback, useRef } from "react";
-import pullOllamaModel from "../api/pullOllamaModel";
+import pullOllamaModel from "@api/pullOllamaModel";
 import pullingStore from "./store/pullingStore";
 
 const usePullOllamaModel = (onChunk: (value: ProgressResponse & ErrorResponse) => void) => {
