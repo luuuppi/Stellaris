@@ -2,7 +2,7 @@ import { useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import Button from "@ui/button";
 import SessionItem from "@/widgets/sessionItem";
-import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
+import { Link, Outlet, useNavigate, useParams } from "@tanstack/react-router";
 import { Plus, SettingsIcon } from "lucide-react";
 import { type FC } from "react";
 
@@ -11,9 +11,7 @@ const SessionsLayout: FC = () => {
   const createSession = useSessionStore((state) => state.createSession);
   const model = useSettingsStore((state) => state.model);
   const navigate = useNavigate();
-  const currentId = useLocation({
-    select: (location) => location.pathname.slice(-5),
-  });
+  const { sessionId: currentId } = useParams({ strict: false });
 
   const handleCreateSesstion = () => {
     const id = createSession(model);
