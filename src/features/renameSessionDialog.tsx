@@ -30,7 +30,7 @@ const RenameSessionDialog: FC<RenameSessionDialogProps> = ({
 }) => {
   const closeRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState<string>("");
-  const renameSession = useSessionStore((state) => state.renameSession);
+  const renameSession = useSessionStore((state) => state.setSessionName);
 
   const inputChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
