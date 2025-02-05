@@ -21,98 +21,91 @@ type SessionsState = {
   createSession: (model: string) => string;
   deleteSession: (id: string) => void;
   setMessage: (id: string, message: Message) => void;
-  renameSession: (id: string, name: string) => void;
-  getSessionName: (id: string) => string | undefined;
+  setSessionName: (id: string, name: string) => void;
+  setSystemMessage: (id: string, sysMessage: string) => void;
+  setSessionModel: (id: string, model: string) => void;
   clearSessions: () => void;
-  getSessionMessages: (id: string) => Message[] | undefined;
-  getModel: (id: string) => string;
-  getSystemMessage: (id: string) => string;
-  setSystemMessage: (id: string, value: string) => void;
-  setSessionModel: (id: string, value: string) => void;
 };
 
 export const useSessionStore = create<SessionsState>()(
   persist(
-    (set, get) => ({
-      sessions: [],
-      createSession: (model) => {
-        const id = generateId();
+    (set) => {
+      const findSession = (draft: SessionsState, id: string) => {
+        return draft.sessions.find((session) => session.id === id);
+      };
 
-        set(
-          produce((state: SessionsState) => {
-            state.sessions.push({ id, name: "", messages: [], model, systemMessage: "" });
-          }),
-        );
+      return {
+        sessions: [],
+        createSession: (model) => {
+          const id = generateId();
 
-        return id;
-      },
-      deleteSession: (id) => {
-        return set((state) => ({
-          sessions: [...state.sessions.filter((session) => session.id !== id)],
-        }));
-      },
-      setMessage: (id, message) => {
-        return set(
-          produce((state: SessionsState) => {
-            state.sessions.find((session) => session.id === id)?.messages.push(message);
-          }),
-        );
-      },
-      renameSession: (id, name) => {
-        return set(
-          produce((state: SessionsState) => {
-            const neededSession = state.sessions.find((session) => session.id === id);
+          set(
+            produce((state: SessionsState) => {
+              state.sessions.push({ id, name: "", messages: [], model, systemMessage: "" });
+            }),
+          );
 
-            if (neededSession?.name === undefined) {
-              console.log("Wrong id");
-            } else {
-              neededSession.name = name;
-            }
-          }),
-        );
-      },
-      getSessionName: (id) => {
-        const name = get().sessions.find((session) => session.id === id)?.name;
+          return id;
+        },
+        deleteSession: (id) => {
+          return set((state) => ({
+            sessions: [...state.sessions.filter((session) => session.id !== id)],
+          }));
+        },
+        setMessage: (id, message) => {
+          return set(
+            produce((state: SessionsState) => {
+              findSession(state, id)?.messages.push(message);
+            }),
+          );
+        },
+        setSessionName: (id, name) => {
+          return set(
+            produce((state: SessionsState) => {
+              const session = findSession(state, id);
 
-        if (name === "") return undefined;
+              if (session) session.name = name;
+            }),
+          );
+        },
+        setSystemMessage: (id, sysMessage) => {
+          return set(
+            produce((state: SessionsState) => {
+              const session = findSession(state, id);
 
-        return name;
-      },
-      clearSessions: () => {
-        return set(() => ({ sessions: [] }));
-      },
-      getSessionMessages: (id) => {
-        return get().sessions.find((session) => session.id === id)?.messages;
-      },
-      getModel: (id) => {
-        return get().sessions.find((session) => session.id === id)?.model ?? "";
-      },
-      getSystemMessage: (id) => {
-        return get().sessions.find((session) => session.id === id)?.systemMessage ?? "";
-      },
-      setSystemMessage: (id, value) => {
-        return set(
-          produce((state: SessionsState) => {
-            const neededSession = state.sessions.find((session) => session.id === id);
+              if (session) session.systemMessage = sysMessage;
+            }),
+          );
+        },
+        setSessionModel: (id, model) => {
+          return set(
+            produce((state: SessionsState) => {
+              const session = findSession(state, id);
 
-            if (neededSession?.systemMessage === undefined) throw new Error("Wrong id");
-
-            neededSession.systemMessage = value;
-          }),
-        );
-      },
-      setSessionModel: (id, value) => {
-        return set(
-          produce((state: SessionsState) => {
-            const neededSession = state.sessions.find((session) => session.id === id);
-
-            if (neededSession?.model === undefined) throw new Error("Wrong id");
-
-            neededSession.model = value;
-          }),
-        );
-      },
-    }),
+              if (session) session.model = model;
+            }),
+          );
+        },
+        clearSessions: () => {
+          return set(() => ({ sessions: [] }));
+        },
+      };
+    },
     { name: "sessions" },
   ),
 );
+
+export const selectSession = (id: string) => (state: SessionsState) =>
+  state.sessions.find((s) => s.id === id);
+
+export const selectSessionName = (id: string) => (state: SessionsState) =>
+  selectSession(id)(state)?.name ?? "";
+
+export const selectSessionMessages = (id: string) => (state: SessionsState) =>
+  selectSession(id)(state)?.messages ?? [];
+
+export const selectSessionModel = (id: string) => (state: SessionsState) =>
+  selectSession(id)(state)?.model ?? "";
+
+export const selectSessionSysMessage = (id: string) => (state: SessionsState) =>
+  selectSession(id)(state)?.systemMessage ?? "";

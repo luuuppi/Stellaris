@@ -1,4 +1,4 @@
-import { useSessionStore } from "@/store/useSessionsStore";
+import { selectSession, useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import ollamaChatRequest from "@api/ollamaChatRequest";
 import completionStore from "../model/store/completionStore";
@@ -12,17 +12,16 @@ type useOllamaChatArgs = {
 const useOllamaChat = (args: useOllamaChatArgs) => {
   const { id, onChunk } = args;
   const server = useSettingsStore((state) => state.ollamaServer);
-  const getMessages = useSessionStore((state) => state.getSessionMessages);
   const setMessage = useSessionStore((state) => state.setMessage);
-  const getSysMessage = useSessionStore((state) => state.getSystemMessage);
-  const getModel = useSessionStore((state) => state.getModel);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const ollamaChat = async () => {
     try {
-      const messages = getMessages(id) ?? [];
-      const model = getModel(id);
-      const sysMessage = getSysMessage(id);
+      const sessionState = useSessionStore.getState();
+      const session = selectSession(id)(sessionState);
+      const messages = session?.messages ?? [];
+      const sysMessage = session?.systemMessage ?? "";
+      const model = session?.model ?? "";
 
       const abortController = new AbortController();
       abortControllerRef.current = abortController;

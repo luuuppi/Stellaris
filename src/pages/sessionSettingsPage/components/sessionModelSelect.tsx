@@ -1,6 +1,6 @@
 import ModelSelect from "@/features/modelSelect";
 import useOllamaTags from "@api/useOllamaTags";
-import { useSessionStore } from "@/store/useSessionsStore";
+import { selectSessionModel, useSessionStore } from "@/store/useSessionsStore";
 import { useSettingsStore } from "@/store/useSettingsStore";
 import { type FC } from "react";
 
@@ -10,9 +10,7 @@ type SessionModelSelectProps = {
 
 const SessionModelSelect: FC<SessionModelSelectProps> = ({ id }) => {
   const serverStatus = useSettingsStore((state) => state.serverStatus);
-  const currentModel =
-    useSessionStore((state) => state.sessions.find((session) => session.id === id)?.model) ??
-    "";
+  const currentModel = useSessionStore(selectSessionModel(id));
   const setModel = useSessionStore((state) => state.setSessionModel);
   const { data } = useOllamaTags();
 

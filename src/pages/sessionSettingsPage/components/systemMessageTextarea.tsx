@@ -1,4 +1,4 @@
-import { useSessionStore } from "@/store/useSessionsStore";
+import { selectSessionSysMessage, useSessionStore } from "@/store/useSessionsStore";
 import Textarea from "@ui/textarea";
 import Label from "@ui/label";
 import { ChangeEvent, type FC } from "react";
@@ -8,9 +8,7 @@ type SystemMessageTextareaProps = {
 };
 
 const SystemMessageTextarea: FC<SystemMessageTextareaProps> = ({ id }) => {
-  const sysMessage = useSessionStore(
-    (state) => state.sessions.find((session) => session.id === id)?.systemMessage,
-  );
+  const sysMessage = useSessionStore(selectSessionSysMessage(id));
   const setSysMessage = useSessionStore((state) => state.setSystemMessage);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -20,7 +18,7 @@ const SystemMessageTextarea: FC<SystemMessageTextareaProps> = ({ id }) => {
   return (
     <div>
       <Label>System message</Label>
-      <Textarea className="mt-1" value={sysMessage ?? ""} onChange={handleChange} />
+      <Textarea className="mt-1" value={sysMessage} onChange={handleChange} />
     </div>
   );
 };
