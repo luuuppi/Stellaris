@@ -8,7 +8,7 @@ export type Message = {
   content: string;
 };
 
-type Session = {
+export type Session = {
   id: string;
   name: string;
   messages: Message[];
