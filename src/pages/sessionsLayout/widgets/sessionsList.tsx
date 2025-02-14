@@ -15,7 +15,11 @@ const SessionsList: FC = () => {
     <nav className="better-scrollbar flex h-full w-full flex-col gap-6 overflow-y-auto overflow-x-hidden">
       {groupedSessions.map((gp) => (
         <div key={gp.label}>
-          <motion.span layout className="mb-3 ml-2 inline-block text-base font-semibold">
+          <motion.span
+            layout
+            transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+            className="mb-3 ml-2 inline-block text-base font-semibold"
+          >
             {gp.label}
           </motion.span>
           <div className="flex flex-col gap-1">
