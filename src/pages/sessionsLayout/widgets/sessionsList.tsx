@@ -12,7 +12,7 @@ const SessionsList: FC = () => {
   const { sessionId: currentId } = useParams({ strict: false });
 
   return (
-    <nav className="better-scrollbar flex h-full w-full flex-col gap-6 overflow-auto">
+    <nav className="better-scrollbar flex h-full w-full flex-col gap-6 overflow-y-auto overflow-x-hidden">
       {groupedSessions.map((gp) => (
         <div key={gp.label}>
           <motion.span layout className="mb-3 ml-2 inline-block text-base font-semibold">
