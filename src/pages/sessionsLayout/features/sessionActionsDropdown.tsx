@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
 } from "@ui/dropdown";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
-import { Ellipsis } from "lucide-react";
+import { Ellipsis, PenLine, Trash2 } from "lucide-react";
 import { type FC, memo, useState } from "react";
 
 type SessionActionsDropdownProps = {
@@ -35,9 +35,11 @@ const SessionActionsDropdown: FC<SessionActionsDropdownProps> = memo(
         </Tooltip>
         <DropdownMenuContent>
           <DropdownMenuItem onSelect={() => setRenameOpen((prev) => !prev)}>
+            <PenLine size={20} />
             Rename
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => setDeleteOpen((prev) => !prev)}>
+            <Trash2 size={20} />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
