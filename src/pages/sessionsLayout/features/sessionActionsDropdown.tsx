@@ -1,30 +1,27 @@
 import DeleteSessionDialog from "@/features/deleteSessionDialog";
 import RenameSessionDialog from "@/features/renameSessionDialog";
+import Button from "@ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuItem,
 } from "@ui/dropdown";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
-import Button from "@ui/button";
 import { Ellipsis } from "lucide-react";
-import { type FC, useState } from "react";
+import { type FC, memo, useState } from "react";
 
 type SessionActionsDropdownProps = {
   sessionId: string;
   sessionName: string;
 };
 
-const SessionActionsDropdown: FC<SessionActionsDropdownProps> = ({
-  sessionId,
-  sessionName,
-}) => {
-  const [renameOpen, setRenameOpen] = useState<boolean>(false);
-  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+const SessionActionsDropdown: FC<SessionActionsDropdownProps> = memo(
+  ({ sessionId, sessionName }) => {
+    const [renameOpen, setRenameOpen] = useState<boolean>(false);
+    const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
 
-  return (
-    <>
+    return (
       <DropdownMenu>
         <Tooltip>
           <TooltipTrigger>
@@ -56,8 +53,8 @@ const SessionActionsDropdown: FC<SessionActionsDropdownProps> = ({
           onOpenChange={setDeleteOpen}
         />
       </DropdownMenu>
-    </>
-  );
-};
+    );
+  },
+);
 
 export default SessionActionsDropdown;

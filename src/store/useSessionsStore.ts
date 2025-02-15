@@ -8,12 +8,13 @@ export type Message = {
   content: string;
 };
 
-type Session = {
+export type Session = {
   id: string;
   name: string;
   messages: Message[];
   model: string;
   systemMessage: string;
+  lastMessageDate: number;
 };
 
 type SessionsState = {
@@ -38,10 +39,18 @@ export const useSessionStore = create<SessionsState>()(
         sessions: [],
         createSession: (model) => {
           const id = generateId();
+          const currentDate = new Date().setHours(0, 0, 0, 0);
 
           set(
             produce((state: SessionsState) => {
-              state.sessions.push({ id, name: "", messages: [], model, systemMessage: "" });
+              state.sessions.push({
+                id,
+                name: "",
+                messages: [],
+                model,
+                systemMessage: "",
+                lastMessageDate: currentDate,
+              });
             }),
           );
 
@@ -55,7 +64,12 @@ export const useSessionStore = create<SessionsState>()(
         setMessage: (id, message) => {
           return set(
             produce((state: SessionsState) => {
-              findSession(state, id)?.messages.push(message);
+              const session = findSession(state, id);
+
+              if (session) {
+                session.messages.push(message);
+                session.lastMessageDate = new Date().setHours(0, 0, 0, 0);
+              }
             }),
           );
         },
