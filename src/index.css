@@ -60,6 +60,10 @@
     background-size: 20px 2px;
     background-repeat: repeat-x;
   }
+
+  .link {
+    @apply underline decoration-white decoration-1 underline-offset-4 transition-colors duration-200 ease-in-out hover:text-accent-200 hover:decoration-accent-200;
+  }
 }
 
 #root {
