@@ -92,7 +92,7 @@ const DropdownMenuContent = forwardRef<
             {...props}
           >
             <motion.div
-              className="flex origin-[var(--radix-dropdown-menu-content-transform-origin)] flex-col justify-center gap-1 rounded-xl border border-night-700 bg-night-900 p-2"
+              className="flex origin-[var(--radix-dropdown-menu-content-transform-origin)] flex-col justify-center gap-1 rounded-xl border border-night-700 bg-night-900 p-1"
               variants={dropdownMenuContentAnimation}
               initial="closed"
               animate="opened"
@@ -118,7 +118,7 @@ const DropdownMenuItem = forwardRef<
 >(({ children, ...props }, ref) => {
   return (
     <ItemPrimitive
-      className="flex cursor-pointer items-center justify-start gap-1 rounded-md p-1 text-white outline-none transition-colors duration-200 ease-in-out active:bg-red-700 data-[highlighted]:bg-night-700/30"
+      className="flex cursor-pointer items-center justify-start gap-3 rounded-md px-2 py-1 text-white outline-none transition-colors duration-200 ease-in-out active:bg-red-700 data-[highlighted]:bg-night-700/30"
       onClick={(e) => e.stopPropagation()}
       asChild
       ref={ref}

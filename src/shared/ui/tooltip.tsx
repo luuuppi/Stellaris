@@ -18,7 +18,7 @@ const TooltipContext = createContext<TooltipContextType>({ isOpen: false });
 
 const Tooltip: FC<ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>> = ({
   children,
-  delayDuration = 300,
+  delayDuration = 600,
   open,
   onOpenChange,
   ...props
